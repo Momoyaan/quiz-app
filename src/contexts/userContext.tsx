@@ -1,21 +1,38 @@
-import { createContext, useState } from 'react';
+import { createContext, useContext, useState } from "react";
+import  fakeAuthProvider  from "../pages/Authentication/fakeAuthProvider";
+interface AuthContextType {
+  user: unknown;
+  signin: (user: string, callback: VoidFunction) => void;
+  signout: (callback: VoidFunction) => void;
+}
 
-const AuthenticationContext = createContext({});
+const AuthContext = createContext<AuthContextType>(null!);
 
-const AuthenticationProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Default login status
+function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<unknown>(null);
 
-  const value = {
-    isLoggedIn,
-    setIsLoggedIn,
+  const signin = (newUser: string, callback: VoidFunction) => {
+    return fakeAuthProvider.signin(() => {
+      setUser(newUser);
+      callback();
+    });
   };
 
-  return (
-    <AuthenticationContext.Provider
-    value={value}>
-      {children}
-    </AuthenticationContext.Provider>
-  );
-};
+  const signout = (callback: VoidFunction) => {
+    return fakeAuthProvider.signout(() => {
+      setUser(null);
+      callback();
+    });
+  };
 
-export { AuthenticationContext, AuthenticationProvider };
+  const value = { user, signin, signout };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+function useAuth() {
+  return useContext(AuthContext);
+}
+
+
+export { AuthContext, useAuth, AuthProvider }

@@ -1,15 +1,19 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
-import { Route, Routes, Navigate, BrowserRouter } from 'react-router-dom';
+import { Route, Routes, Navigate, BrowserRouter, Outlet } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { AuthenticationProvider } from './contexts/userContext';
-import Teacher from './pages/Dashboard/Teacher';
-import SignIn from './pages/Authentication/SignIn';
-import SignUp from './pages/Authentication/SignUp';
-import Loader from './common/Loader';
+
 import routes from './routes';
-import Student from './pages/Dashboard/Student';
-import StudentLayout from "./layout/StudentLayout"
-import ErrorPage from './pages/ErrorPage';
+import RequireAuth from './pages/Authentication/RequreAuth';
+import { AuthProvider } from './contexts/userContext';
+
+
+const Teacher = lazy(() => import('./pages/Dashboard/Teacher'));
+const SignIn = lazy(() => import('./pages/Authentication/SignIn'));
+const SignUp = lazy(() => import('./pages/Authentication/SignUp'));
+const Loader = lazy(() => import('./common/Loader'));
+const Student = lazy(() => import('./pages/Dashboard/Student'));
+const StudentLayout = lazy(() => import('./layout/StudentLayout'));
+const ErrorPage = lazy(() => import('./pages/ErrorPage'));
 const TeacherLayout = lazy(() => import('./layout/TeacherLayout'));
 
 function App() {
@@ -28,12 +32,13 @@ function App() {
         reverseOrder={false}
         containerClassName="overflow-auto"
       />
-      <BrowserRouter>
+      <AuthProvider>
+       <BrowserRouter>
       <Routes>
         <Route path="/" element={ <Navigate to="/auth/signin"/>}/>
         <Route path="/auth/signin" element={<SignIn />} />
         <Route path="/auth/signup" element={<SignUp />} />
-        <Route element={<TeacherLayout />}>
+        <Route element={<RequireAuth><TeacherLayout /></RequireAuth>}>
           <Route path="/teacher" element={<Teacher />} />
           {routes.map((routes, index) => {
             const { path, component: Component } = routes;
@@ -70,6 +75,7 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
       </Routes> 
    </BrowserRouter>
+</AuthProvider>
     </>
   );
 }

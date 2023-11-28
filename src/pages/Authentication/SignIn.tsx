@@ -1,19 +1,19 @@
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import {  useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import {  useContext, useState } from 'react';
 import axios from 'axios';
 import ErrorLogin from '../../components/ErrorLogin';
+import { useAuth } from '../../contexts/userContext';
+
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState(false);
+  const auth = useAuth();
+  const navigate = useNavigate();
 
 
- const params = useParams();
- const navigate = useNavigate();
-
-
- async function onSubmit(e) {
+  async function onSubmit(e) {
    e.preventDefault();
 
    try {
@@ -23,9 +23,10 @@ const SignIn = () => {
     // Handle the server response
     console.log(message);
 
-
     if (user) {
-      navigate('/teacher'); 
+      auth.signin(email, () => {
+        navigate('/teacher'); 
+      })
     }
   } catch (error) {
     setErrorMessage(true);
@@ -36,8 +37,9 @@ const SignIn = () => {
 
     return (
 
-    <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-lg">
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="max-w-lg">
         <h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">
           Get started today
         </h1>
@@ -136,6 +138,7 @@ const SignIn = () => {
           </p>
         </form>
       </div>
+    </div>
     </div>
     
 )

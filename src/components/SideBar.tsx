@@ -1,8 +1,17 @@
-import { Link } from "react-router-dom"
+import React from "react";
+import { Link, useNavigate } from "react-router-dom"
 
 const SideBar = () => {
 
+  const navigate = useNavigate();
+  const logout = () => {
+      localStorage.clear();
+      navigate('/auth/signin');
+  }
+
+
 return (
+  <React.Fragment>
 <div class="flex h-screen flex-col justify-between border-e bg-white">
   <div class="px-4 py-6">
     <span
@@ -131,9 +140,10 @@ return (
             </li>
 
             <li>
-              <form action="/logout">
+              <form action="/login">
                 <button
                   type="submit"
+                  onClick={logout}
                   class="w-full rounded-lg px-4 py-2 text-sm font-medium text-gray-500 [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700"
                 >
                   Logout
@@ -159,6 +169,7 @@ return (
     </Link>
   </div>
 </div>
+</React.Fragment>
  )
 }
 
