@@ -1,36 +1,84 @@
 import { Link } from 'react-router-dom';
 import { useRef, useState, useEffect } from "react";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = '/register';
+
 
 const SignUp = () => {
 
 
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value);
+};
+
+
+    const [form, setForm] = useState({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      occupation: "",
+    })
+
+    const navigate = useNavigate();
+
+    function updateForm(value) {
+      return setForm((prev) => {
+        return {...prev, ...value};
+      });
+    }
+
+    async function onSubmit(e) {
+      e.preventDefault();
+    
+      const newUser = { ...form };
+    
+      try {
+        await axios.post("http://localhost:5050/users", newUser, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+    
+        setForm({
+          firstName: "",
+          lastName: "",
+          email: "",
+          password: "",
+          occupation: "",
+        });
+        
+        navigate("/");
+      } catch (error) {
+        window.alert(error.message);
+      }
+    }
+
     return (
 
-<section class="bg-white">
-  <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
+<section className="bg-white">
+  <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
     <aside
-      class="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6"
+      className="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6"
     >
       <img
         alt="Pattern"
         src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-        class="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover"
       />
     </aside>
 
     <main
-      class="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
+      className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
     >
-      <div class="max-w-xl lg:max-w-3xl">
-        <a class="block text-blue-600" href="/">
-          <span class="sr-only">Home</span>
+      <div className="max-w-xl lg:max-w-3xl">
+        <a className="block text-blue-600" href="/">
+          <span className="sr-only">Home</span>
           <svg
-            class="h-8 sm:h-10"
+            className="h-8 sm:h-10"
             viewBox="0 0 28 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -43,21 +91,21 @@ const SignUp = () => {
         </a>
 
         <h1
-          class="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl"
+          className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl"
         >
           Welcome to Quiz App 🦑
         </h1>
 
-        <p class="mt-4 leading-relaxed text-gray-500">
+        <p className="mt-4 leading-relaxed text-gray-500">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam
           dolorum aliquam, quibusdam aperiam voluptatum.
         </p>
 
-        <form action="#" class="mt-8 grid grid-cols-6 gap-6">
-          <div class="col-span-6 sm:col-span-3">
+        <form onSubmit={onSubmit} action="#" className="mt-8 grid grid-cols-6 gap-6">
+          <div className="col-span-6 sm:col-span-3">
             <label
               for="FirstName"
-              class="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700"
             >
               First Name
             </label>
@@ -66,14 +114,16 @@ const SignUp = () => {
               type="text"
               id="FirstName"
               name="first_name"
-              class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+              value={form.firstName}
+              onChange={(e) => updateForm({ firstName: e.target.value })}
+              className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
           </div>
 
-          <div class="col-span-6 sm:col-span-3">
+          <div className="col-span-6 sm:col-span-3">
             <label
               for="LastName"
-              class="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700"
             >
               Last Name
             </label>
@@ -82,12 +132,14 @@ const SignUp = () => {
               type="text"
               id="LastName"
               name="last_name"
-              class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+              value={form.lastName}
+              onChange={(e) => updateForm({ lastName: e.target.value })}
+              className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
           </div>
 
-          <div class="col-span-6">
-            <label for="Email" class="block text-sm font-medium text-gray-700">
+          <div className="col-span-6">
+            <label for="Email" className="block text-sm font-medium text-gray-700">
               Email
             </label>
 
@@ -95,14 +147,16 @@ const SignUp = () => {
               type="email"
               id="Email"
               name="email"
-              class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+              value={form.email}
+              onChange={(e) => updateForm({ email: e.target.value })}
+              className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
           </div>
 
-          <div class="col-span-6 sm:col-span-3">
+          <div className="col-span-6 sm:col-span-3">
             <label
               for="Password"
-              class="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700"
             >
               Password
             </label>
@@ -111,63 +165,68 @@ const SignUp = () => {
               type="password"
               id="Password"
               name="password"
-              class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+              value={form.password}
+              onChange={(e) => updateForm({ password: e.target.value })}
+              className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
           </div>
 
-          <div class="col-span-6 sm:col-span-3">
-            <label
-              for="PasswordConfirmation"
-              class="block text-sm font-medium text-gray-700"
-            >
-              Password Confirmation
+          <div className="col-span-6 sm:col-span-3">
+            <div>
+            <label htmlFor="HeadlineAct" className="block text-sm font-medium text-gray-900">
+            Occupation 
             </label>
 
-            <input
-              type="password"
-              id="PasswordConfirmation"
-              name="password_confirmation"
-              class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-            />
+            <select
+              name="HeadlineAct"
+              id="HeadlineAct"
+              className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+              onChange={(e) => updateForm({ occupation: e.target.value })}
+            >
+              <option value="">Please select</option>
+              <option value="Student">Student</option>
+              <option value="Teacher">Teacher</option>
+           </select>
+            </div>
           </div>
 
-          <div class="col-span-6">
-            <label for="MarketingAccept" class="flex gap-4">
+          <div className="col-span-6">
+            <label for="MarketingAccept" className="flex gap-4">
               <input
                 type="checkbox"
                 id="MarketingAccept"
                 name="marketing_accept"
-                class="h-5 w-5 rounded-md border-gray-200 bg-white shadow-sm"
+                className="h-5 w-5 rounded-md border-gray-200 bg-white shadow-sm"
               />
 
-              <span class="text-sm text-gray-700">
+              <span className="text-sm text-gray-700">
                 I want to receive emails about events, product updates and
                 company announcements.
               </span>
             </label>
           </div>
 
-          <div class="col-span-6">
-            <p class="text-sm text-gray-500">
+          <div className="col-span-6">
+            <p className="text-sm text-gray-500">
               By creating an account, you agree to our
-              <a href="#" class="text-gray-700 underline">
+              <Link to="#" className="text-gray-700 underline">
                 terms and conditions
-              </a>
+              </Link>
               and
-              <a href="#" class="text-gray-700 underline">privacy policy</a>.
+              <Link to="#" className="text-gray-700 underline">privacy policy</Link>.
             </p>
           </div>
 
-          <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
+          <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
             <button
-              class="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
+              className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
             >
               Create an account
             </button>
 
-            <p class="mt-4 text-sm text-gray-500 sm:mt-0">
+            <p className="mt-4 text-sm text-gray-500 sm:mt-0">
               Already have an account?
-              <a href="#" class="text-gray-700 underline">Log in</a>.
+              <Link to="/" className="text-gray-700 underline">Log in</Link>.
             </p>
           </div>
         </form>

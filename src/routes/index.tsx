@@ -5,6 +5,7 @@ const Profile = lazy(() => import('../pages/Profile'));
 const Settings = lazy(() => import('../pages/Settings'));
 const Calendar = lazy(() => import('../pages/Calendar'))
 
+
 const coreRoutes = [
 
   {
@@ -24,6 +25,7 @@ const coreRoutes = [
     title: 'Calendar',
     component: Calendar,
   },
+
 
 ];
 

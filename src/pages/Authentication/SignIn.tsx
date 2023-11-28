@@ -1,45 +1,75 @@
-import { Link } from 'react-router-dom';
-import { useRef, useState, useEffect } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import {  useState, useEffect } from 'react';
 import axios from 'axios';
-
-const LOGIN_URL = '/auth/signin'
+import ErrorLogin from '../../components/ErrorLogin';
 
 const SignIn = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState(false);
 
+
+ const params = useParams();
+ const navigate = useNavigate();
+
+
+ async function onSubmit(e) {
+   e.preventDefault();
+
+   try {
+    const response = await axios.get(`http://localhost:5050/users/${email}/${password}`);
+    const { message, user } = response.data;
+
+    // Handle the server response
+    console.log(message);
+
+
+    if (user) {
+      navigate('/teacher'); 
+    }
+  } catch (error) {
+    setErrorMessage(true);
+    console.error('Error fetching user:', error);
+
+  }
+ }
 
     return (
 
-    <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-lg">
-        <h1 class="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">
+    <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-lg">
+        <h1 className="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">
           Get started today
         </h1>
     
-        <p class="mx-auto mt-4 max-w-md text-center text-gray-500">
+        <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati sunt
           dolores deleniti inventore quaerat mollitia?
         </p>
     
         <form
+          onSubmit={onSubmit}
           action=""
-          class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
+          className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
         >
-          <p class="text-center text-lg font-medium">Sign in to your account</p>
+          <p className="text-center text-lg font-medium">Sign in to your account</p>
     
           <div>
-            <label for="email" class="sr-only">Email</label>
+            <label for="email" className="sr-only">Email</label>
     
-            <div class="relative">
+            <div className="relative">
               <input
                 type="email"
-                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                value={email}
+                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                 placeholder="Enter email"
+                onChange={(e) => setEmail(e.target.value)}
               />
     
-              <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
+              <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 text-gray-400"
+                  className="h-4 w-4 text-gray-400"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -56,19 +86,21 @@ const SignIn = () => {
           </div>
     
           <div>
-            <label for="password" class="sr-only">Password</label>
+            <label for="password" className="sr-only">Password</label>
     
-            <div class="relative">
+            <div className="relative">
               <input
                 type="password"
-                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                value={password}
+                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                 placeholder="Enter password"
+                onChange={(e) => setPassword(e.target.value)}
               />
     
-              <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
+              <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 text-gray-400"
+                  className="h-4 w-4 text-gray-400"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -92,14 +124,15 @@ const SignIn = () => {
     
           <button
             type="submit"
-            class="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
+            //onClick={handleLogin}
+            className="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
           >
             Sign in
           </button>
-    
-          <p class="text-center text-sm text-gray-500">
+          {errorMessage && <ErrorLogin />}
+          <p className="text-center text-sm text-gray-500">
             No account? 
-            <a class="underline" href="">Sign up</a>
+            <Link className="underline" to="/auth/signup">Sign up</Link>
           </p>
         </form>
       </div>
@@ -108,4 +141,6 @@ const SignIn = () => {
 )
 }
 
-export default SignIn
+
+
+export default SignIn;

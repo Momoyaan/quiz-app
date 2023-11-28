@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate, BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-
+import { AuthenticationProvider } from './contexts/userContext';
 import Teacher from './pages/Dashboard/Teacher';
 import SignIn from './pages/Authentication/SignIn';
 import SignUp from './pages/Authentication/SignUp';
@@ -28,6 +28,7 @@ function App() {
         reverseOrder={false}
         containerClassName="overflow-auto"
       />
+      <BrowserRouter>
       <Routes>
         <Route path="/" element={ <Navigate to="/auth/signin"/>}/>
         <Route path="/auth/signin" element={<SignIn />} />
@@ -67,7 +68,8 @@ function App() {
           })}
         </Route>
           <Route path="*" element={<ErrorPage />} />
-      </Routes>
+      </Routes> 
+   </BrowserRouter>
     </>
   );
 }
