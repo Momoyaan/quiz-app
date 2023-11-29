@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import  fakeAuthProvider  from "../pages/Authentication/fakeAuthProvider";
+
 interface AuthContextType {
   user: unknown;
   signin: (user: string, callback: VoidFunction) => void;

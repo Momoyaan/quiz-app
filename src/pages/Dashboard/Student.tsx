@@ -4,7 +4,7 @@ const Student = () => {
 
     return (
         <>
-            <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
                 <StudentCard></StudentCard> 
                 <StudentCard></StudentCard>
                 <StudentCard></StudentCard>
