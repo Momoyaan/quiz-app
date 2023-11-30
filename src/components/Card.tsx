@@ -1,11 +1,13 @@
+import { Link } from "react-router-dom"
 import { TeacherButton, StudentButton } from "./Button"
+import React from "react"
 
 export const TeacherCard = () => {
 
     return (
-        <>
-        <a
-  href="#"
+        <React.Fragment>
+        <Link
+  Link="#"
   class="relative block overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8"
 >
   <span
@@ -44,9 +46,9 @@ export const TeacherCard = () => {
       <dd class="text-xs text-gray-500">10 minute</dd>
     </div>
   </dl>
-</a>
+</Link>
 
-        </>
+        </React.Fragment>
     )
 }
 

@@ -1,17 +1,20 @@
-import { Suspense, lazy, useEffect, useState } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
+import { Suspense, lazy, useEffect, useState } from "react";
+import { Route, Routes, Navigate, BrowserRouter } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
-import Teacher from './pages/Dashboard/Teacher';
-import SignIn from './pages/Authentication/SignIn';
-import SignUp from './pages/Authentication/SignUp';
-import Loader from './common/Loader';
-import routes from './routes';
-import Student from './pages/Dashboard/Student';
-import StudentLayout from "./layout/StudentLayout"
-import ErrorPage from './pages/ErrorPage';
-const TeacherLayout = lazy(() => import('./layout/TeacherLayout'));
+import RequireAuth from "./pages/Authentication/RequreAuth";
 
+const Teacher = lazy(() => import("./pages/Dashboard/Teacher"));
+const SignIn = lazy(() => import("./pages/Authentication/SignIn"));
+const SignUp = lazy(() => import("./pages/Authentication/SignUp"));
+const Profile = lazy(() => import("./pages/Profile"));
+const Settings = lazy(() => import("./pages/Settings"));
+const Calendar = lazy(() => import("./pages/Calendar"));
+const Loader = lazy(() => import("./common/Loader"));
+const Student = lazy(() => import("./pages/Dashboard/Student"));
+const StudentLayout = lazy(() => import("./layout/StudentLayout"));
+const ErrorPage = lazy(() => import("./pages/ErrorPage"));
+const TeacherLayout = lazy(() => import("./layout/TeacherLayout"));
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -28,46 +31,100 @@ function App() {
         reverseOrder={false}
         containerClassName="overflow-auto"
       />
-      <Routes>
-        <Route path="/" element={ <Navigate to="/auth/signin"/>}/>
-        <Route path="/auth/signin" element={<SignIn />} />
-        <Route path="/auth/signup" element={<SignUp />} />
-        <Route element={<TeacherLayout />}>
-          <Route path="/teacher" element={<Teacher />} />
-          {routes.map((routes, index) => {
-            const { path, component: Component } = routes;
-            return (
+      <Suspense fallback={<Loader></Loader>}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Navigate to="/auth/signin" />} />
+              <Route path="/auth/signin" element={<SignIn />} />
+              <Route path="/auth/signup" element={<SignUp />} />
               <Route
-                key={index}
-                path={path}
                 element={
-                  <Suspense fallback={<Loader />}>
-                    <Component />
+                  <Suspense fallback={<Loader></Loader>}>
+                    <RequireAuth>
+                      <TeacherLayout />
+                    </RequireAuth>
                   </Suspense>
                 }
-              />
-            );
-          })}
-        </Route>
-        <Route element={<StudentLayout />}>
-          <Route path="/student" element={<Student />} />
-          {routes.map((routes, index) => {
-            const { path, component: Component } = routes;
-            return (
+              >
+                <Route
+                  path="/teacher"
+                  element={
+                    <Suspense fallback={<Loader></Loader>}>
+                      <Teacher />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <Suspense fallback={<Loader></Loader>}>
+                      <Profile />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/settings"
+                  element={
+                    <Suspense fallback={<Loader></Loader>}>
+                      <Settings />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/calendar"
+                  element={
+                    <Suspense fallback={<Loader></Loader>}>
+                      <Calendar />
+                    </Suspense>
+                  }
+                />
+              </Route>
               <Route
-                key={index}
-                path={path}
                 element={
-                  <Suspense fallback={<Loader />}>
-                    <Component />
+                  <Suspense fallback={<Loader></Loader>}>
+                    <RequireAuth>
+                      <StudentLayout />
+                    </RequireAuth>
                   </Suspense>
                 }
-              />
-            );
-          })}
-        </Route>
-          <Route path="*" element={<ErrorPage />} />
-      </Routes>
+              >
+                <Route
+                  path="/student"
+                  element={
+                    <Suspense fallback={<Loader></Loader>}>
+                      <Student />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <Suspense fallback={<Loader></Loader>}>
+                      <Profile />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/settings"
+                  element={
+                    <Suspense fallback={<Loader></Loader>}>
+                      <Settings />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/calendar"
+                  element={
+                    <Suspense fallback={<Loader></Loader>}>
+                      <Calendar />
+                    </Suspense>
+                  }
+                />
+              </Route>
+              <Route path="*" element={<ErrorPage />} />
+            </Routes>
+          </BrowserRouter>
+      </Suspense>
     </>
   );
 }
