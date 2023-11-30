@@ -2,10 +2,7 @@ import { Suspense, lazy, useEffect, useState } from "react";
 import { Route, Routes, Navigate, BrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
-import routes from "./routes";
 import RequireAuth from "./pages/Authentication/RequreAuth";
-import { AuthProvider } from "./contexts/userContext";
-import { userOccupation } from "./pages/Authentication/userData";
 
 const Teacher = lazy(() => import("./pages/Dashboard/Teacher"));
 const SignIn = lazy(() => import("./pages/Authentication/SignIn"));
@@ -35,7 +32,6 @@ function App() {
         containerClassName="overflow-auto"
       />
       <Suspense fallback={<Loader></Loader>}>
-        <AuthProvider>
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Navigate to="/auth/signin" />} />
@@ -128,7 +124,6 @@ function App() {
               <Route path="*" element={<ErrorPage />} />
             </Routes>
           </BrowserRouter>
-        </AuthProvider>
       </Suspense>
     </>
   );

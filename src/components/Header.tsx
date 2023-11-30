@@ -1,5 +1,4 @@
-import { userfirstName } from "../pages/Authentication/userData";
-
+const firstName = localStorage.getItem("firstName");
 export const TeacherHeader = () => {
   return (
     <header className="bg-gray-50">
@@ -7,7 +6,7 @@ export const TeacherHeader = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="text-center sm:text-left">
             <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">
-              Welcome Back, {userfirstName.value}!
+              Welcome Back, {firstName}!
             </h1>
 
             <p className="mt-1 text-sm text-gray-500">
@@ -58,7 +57,7 @@ export const StudentHeader = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="text-center sm:text-left">
             <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">
-              Welcome Back, Ian!
+              Welcome Back, {firstName}!
             </h1>
 
             <p className="mt-1 text-sm text-gray-500">

@@ -1,11 +1,12 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { userfirstName, userlastName, userEmail } from "../pages/Authentication/userData";
 const SideBar = () => {
   const navigate = useNavigate();
- 
-  const logout = () => {
-    localStorage.clear();
+  const email = localStorage.getItem("email"); 
+  const firstName = localStorage.getItem("firstName");
+  const lastName = localStorage.getItem("lastName");
+  const logout = async () => {
+    await localStorage.clear();
     navigate("/auth/signin");
   };
 
@@ -163,9 +164,9 @@ const SideBar = () => {
             </svg>
             <div>
               <p className="text-xs">
-                <strong className="block font-medium">{userfirstName.value} {userlastName.value}</strong>
+                <strong className="block font-medium">{firstName} {lastName}</strong>
 
-                <span> {userEmail.value} </span>
+                <span> {email} </span>
               </p>
             </div>
           </Link>

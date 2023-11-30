@@ -1,15 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import ErrorLogin from "../../components/ErrorLogin";
-import { useAuth } from "../../contexts/userContext";
-import { userfirstName, userlastName, userEmail, userOccupation } from "./userData";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
-  const auth = useAuth();
   const navigate = useNavigate();
 
   async function onSubmit(e) {
@@ -19,21 +16,21 @@ const SignIn = () => {
       const response = await axios.get(
         `http://localhost:5050/users/${email}/${password}`,
       );
-      const { message, user } = response.data;
-      userfirstName.value = user.firstName;
-      userlastName.value = user.lastName;
-      userEmail.value = user.email;
-      userOccupation.value = user.occupation;
-      if (user) {
-        auth.signin(email, () => {
-          if (user.occupation == "Teacher") {
-            navigate("/teacher");
-          }
+      const { user } = response.data;
 
-          if (user.occupation == "Student") {
-            navigate("/student");
-          }
-        });
+      localStorage.setItem("firstName", user.firstName);
+      localStorage.setItem("lastName", user.lastName);
+      localStorage.setItem("email", user.email);
+      localStorage.setItem("occupation", user.occupation);
+
+      if (user) {
+        if (user.occupation == "Teacher") {
+          navigate("/teacher");
+        }
+
+        if (user.occupation == "Student") {
+          navigate("/student");
+        }
       }
     } catch (error) {
       setErrorMessage(true);
@@ -64,7 +61,7 @@ const SignIn = () => {
             </p>
 
             <div>
-              <label for="email" className="sr-only">
+              <label htmlFor="email" className="sr-only">
                 Email
               </label>
 
@@ -97,7 +94,7 @@ const SignIn = () => {
             </div>
 
             <div>
-              <label for="password" className="sr-only">
+              <label htmlFor="password" className="sr-only">
                 Password
               </label>
 
@@ -137,7 +134,6 @@ const SignIn = () => {
 
             <button
               type="submit"
-              //onClick={handleLogin}
               className="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
             >
               Sign in
