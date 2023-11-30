@@ -17,7 +17,7 @@ const SignIn = () => {
         `http://localhost:5050/users/${email}/${password}`,
       );
       const { user } = response.data;
-
+      localStorage.setItem("_id", user._id);
       localStorage.setItem("firstName", user.firstName);
       localStorage.setItem("lastName", user.lastName);
       localStorage.setItem("email", user.email);
