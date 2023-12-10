@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { StudentCard } from "../../components/Card";
 import { useNavigate } from "react-router-dom";
 
 const Student = () => {
@@ -13,9 +12,6 @@ const Student = () => {
   return (
     <>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
-        <StudentCard></StudentCard>
-        <StudentCard></StudentCard>
-        <StudentCard></StudentCard>
       </div>
     </>
   );

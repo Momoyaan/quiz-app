@@ -37,7 +37,7 @@ const SignUp = () => {
     const newUser = { ...form };
 
     try {
-      await axios.post("http://localhost:5050/users", newUser, {
+      await axios.post("http://localhost:5000/users", newUser, {
         headers: {
           "Content-Type": "application/json",
         },

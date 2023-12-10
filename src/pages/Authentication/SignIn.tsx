@@ -13,11 +13,12 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.get(
-        `http://localhost:5050/users/${email}/${password}`,
-      );
-      const { user } = response.data;
-      localStorage.setItem("_id", user._id);
+      const response = await axios.post('http://localhost:5000/users/login', {
+        email: email,
+        password: password,
+      });
+      const user = response.data;
+      localStorage.setItem("id", user.id);
       localStorage.setItem("firstName", user.firstName);
       localStorage.setItem("lastName", user.lastName);
       localStorage.setItem("email", user.email);
@@ -33,8 +34,13 @@ const SignIn = () => {
         }
       }
     } catch (error) {
+      if(error.response.status === 401)
+      {
       setErrorMessage(true);
-      console.error("Error fetching user:", error);
+      }
+      else {
+      alert("Server is not available.")
+      }
     }
   }
 

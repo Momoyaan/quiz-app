@@ -5,7 +5,7 @@ import axios from "axios";
 
 const Settings = () => {
 
-  const id = localStorage.getItem("_id");
+  const id = localStorage.getItem("id");
   const [form, setForm] = useState({
     firstName: localStorage.getItem("firstName"),
     lastName: localStorage.getItem("lastName"),
@@ -28,7 +28,7 @@ const Settings = () => {
     const updateUser = { ...form };
 
     try {
-      await axios.patch(`http://localhost:5050/users/${id}`, updateUser, {
+      await axios.put(`http://localhost:5000/users/${id}`, updateUser, {
         headers: {
           "Content-Type": "application/json",
         },
