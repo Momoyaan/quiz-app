@@ -1,7 +1,7 @@
 import axios from "axios";
 import { StudentCard, TeacherCard } from "../components/Card.tsx";
 import { useState, useEffect } from "react";
-
+import { Breadcrumb } from "../components/Breadcrumb.tsx";
 
 const Quiz = () => {
     const [getquizdata, setQuizdata] = useState([]);
@@ -30,45 +30,28 @@ const Quiz = () => {
         getdata();
     }, [])
 
-    const deletequiz = async (id) => {
-
-        const res2 = await axios.delete(`/deleteuser/${id}`, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-
-        const deletedata = await res2;
-        console.log(deletedata);
-
-        if (res2.status === 422 || !deletedata) {
-            console.log("error");
-        } else {
-            console.log("user deleted");
-            getdata();
-        }
-
-    }
 
     return (
-        <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
-            {occupation == "Teacher" && getquizdata.length > 0 ? (
-                getquizdata.map((quiz) => (
-                    <TeacherCard key={quiz.id} getquizdata={quiz} />
-                ))
-            ) :
-                occupation == "Student" && getquizdata.length > 0 ? (
+        <>
+            <Breadcrumb pageName="Quiz"></Breadcrumb>
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
+                {occupation == "Teacher" && getquizdata.length > 0 ? (
                     getquizdata.map((quiz) => (
-                        (quiz.is_active == "true") &&
-                        <StudentCard key={quiz.id} getquizdata={quiz} />
+                        <TeacherCard key={quiz.id} getquizdata={quiz} />
                     ))
-                )
-                    :
-                    (
-                        <p>No quiz data available</p>
-                    )}
-        </div>
+                ) :
+                    occupation == "Student" && getquizdata.length > 0 ? (
+                        getquizdata.map((quiz) => (
+                            (quiz.is_active == 1) &&
+                            <StudentCard key={quiz.id} getquizdata={quiz} />
+                        ))
+                    )
+                        :
 
+                        <p>No quiz data available</p>
+                }
+            </div>
+        </>
     )
 }
 

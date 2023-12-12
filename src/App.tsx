@@ -91,7 +91,7 @@ function App() {
                 }
               />
               <Route
-                path="/quiz/edit"
+                path="/quiz/edit/*"
                 element={
                   <Suspense fallback={<Loader></Loader>}>
                     <EditQuiz />

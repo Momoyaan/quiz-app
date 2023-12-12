@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 const SideBar = () => {
   const navigate = useNavigate();
-  const email = localStorage.getItem("email"); 
+  const email = localStorage.getItem("email");
   const firstName = localStorage.getItem("firstName");
   const lastName = localStorage.getItem("lastName");
   const logout = async () => {
@@ -22,7 +22,7 @@ const SideBar = () => {
             <li>
               <Link
                 to="/teacher"
-                className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
+                className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
               >
                 Dashboard
               </Link>
@@ -35,7 +35,7 @@ const SideBar = () => {
                 to="/quiz"
                 className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
               >
-               Quiz 
+                Quiz
               </Link>
             </li>
 
@@ -44,7 +44,7 @@ const SideBar = () => {
                 to="/calendar"
                 className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
               >
-               Calendar 
+                Calendar
               </Link>
             </li>
 
