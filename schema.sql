@@ -1,8 +1,24 @@
+-- MariaDB dump 10.19-11.2.2-MariaDB, for Linux (x86_64)
+--
+-- Host: localhost    Database: react
+-- ------------------------------------------------------
+-- Server version	11.2.2-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
 --
 -- Table structure for table `Question_choices`
 --
 
-DROP TABLE IF EXISTS `Question_choices`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Question_choices` (
@@ -17,35 +33,9 @@ CREATE TABLE `Question_choices` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Question_choices`
---
-
-LOCK TABLES `Question_choices` WRITE;
-/*!40000 ALTER TABLE `Question_choices` DISABLE KEYS */;
-INSERT INTO `Question_choices` VALUES
-(1,2,1,'Paris'),
-(2,2,0,'London'),
-(3,2,0,'Berlin'),
-(4,2,0,'Madrid'),
-(8,10,1,'asdasd'),
-(9,10,1,'qweqwasdqweqwwe'),
-(10,10,0,'asdasdqweqe1'),
-(11,10,0,'adqa11as'),
-(12,11,0,'Hehe'),
-(13,12,1,'man'),
-(14,12,0,'hehe'),
-(18,16,0,'ans1'),
-(19,16,1,'ans2'),
-(20,16,0,'ans3'),
-(21,16,0,'ans4');
-/*!40000 ALTER TABLE `Question_choices` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `Questions`
 --
 
-DROP TABLE IF EXISTS `Questions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Questions` (
@@ -59,25 +49,9 @@ CREATE TABLE `Questions` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Questions`
---
-
-LOCK TABLES `Questions` WRITE;
-/*!40000 ALTER TABLE `Questions` DISABLE KEYS */;
-INSERT INTO `Questions` VALUES
-(2,'What is the capital of France?',29),
-(10,'HHHHH',29),
-(11,'L',29),
-(12,'idk',29),
-(16,'Test1',23);
-/*!40000 ALTER TABLE `Questions` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `Quizzes`
 --
 
-DROP TABLE IF EXISTS `Quizzes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Quizzes` (
@@ -92,24 +66,9 @@ CREATE TABLE `Quizzes` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Quizzes`
---
-
-LOCK TABLES `Quizzes` WRITE;
-/*!40000 ALTER TABLE `Quizzes` DISABLE KEYS */;
-INSERT INTO `Quizzes` VALUES
-(23,'1','1',1,'Ian Mathew Aviso','2023-12-11 14:39:15'),
-(28,'2','2',1,'Ian Mathew Aviso','2023-12-11 20:44:34'),
-(29,'zamn','XXXXXXXXXXXXXX',0,'Ian Mathew Aviso','2023-12-11 21:28:34'),
-(30,'Test','bro',0,'Ian Mathew Aviso','2023-12-12 16:05:05');
-/*!40000 ALTER TABLE `Quizzes` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `User_question_answers`
 --
 
-DROP TABLE IF EXISTS `User_question_answers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `User_question_answers` (
@@ -128,19 +87,9 @@ CREATE TABLE `User_question_answers` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `User_question_answers`
---
-
-LOCK TABLES `User_question_answers` WRITE;
-/*!40000 ALTER TABLE `User_question_answers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `User_question_answers` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
@@ -155,23 +104,9 @@ CREATE TABLE `users` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES
-(10,'Ian Mathew','Aviso','ianmathewaviso@gmail.com','qwerty123','Teacher'),
-(11,'hhh','hhh','bbb@gmail.com','bbb','Student');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Temporary table structure for view `users_view`
 --
 
-DROP TABLE IF EXISTS `users_view`;
-/*!50001 DROP VIEW IF EXISTS `users_view`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE VIEW `users_view` AS SELECT
@@ -182,6 +117,105 @@ SET character_set_client = utf8;
   1 AS `password`,
   1 AS `occupation` */;
 SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping routines for database 'react'
+--
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+DELIMITER ;;
+CREATE  PROCEDURE `create_user`(
+  IN firstName VARCHAR(255),
+  IN lastName VARCHAR(255),
+  IN email VARCHAR(255),
+  IN password VARCHAR(255), 
+  IN occupation VARCHAR(255)
+)
+BEGIN
+  INSERT INTO users (firstName, lastName, email, password, occupation) VALUES (firstName, lastName, email, password, occupation);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+DELIMITER ;;
+CREATE  PROCEDURE `delete_quiz`(
+  IN quiz_id INT
+)
+BEGIN
+  DELETE FROM Quizzes WHERE id = quiz_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+DELIMITER ;;
+CREATE  PROCEDURE `delete_user`(
+  IN user_id INT
+)
+BEGIN
+  DELETE FROM users WHERE id = user_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+DELIMITER ;;
+CREATE  PROCEDURE `update_user`(
+  IN userId INT,
+  IN firstName VARCHAR(255),
+  IN lastName VARCHAR(255),
+  IN email VARCHAR(255),
+  IN password VARCHAR(255),
+  IN occupation VARCHAR(255)
+)
+BEGIN
+  UPDATE users
+  SET firstName = IFNULL(firstName, users.firstName),
+      lastName = IFNULL(lastName, users.lastName),
+      email = IFNULL(email, users.email),
+      password = IFNULL(password, users.password),
+      occupation = IFNULL(occupation, users.occupation)
+  WHERE id = userId;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Final view structure for view `users_view`
@@ -195,7 +229,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50013  SQL SECURITY DEFINER */
 /*!50001 VIEW `users_view` AS select `users`.`id` AS `id`,`users`.`firstName` AS `firstName`,`users`.`lastName` AS `lastName`,`users`.`email` AS `email`,`users`.`password` AS `password`,`users`.`occupation` AS `occupation` from `users` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -210,5 +244,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-12 23:03:06
-
+-- Dump completed on 2023-12-13  9:04:39
