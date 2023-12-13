@@ -29,11 +29,13 @@ export const TeacherButton = ({ getquizdata }: { getquizdata: any }) => {
 }
 
 
-export const StudentButton = () => {
+export const StudentButton = ({ getquizdata }) => {
 
   return (
     <span className="inline-flex overflow-hidden rounded-md border bg-white shadow-sm">
-      <button
+      <Link
+        to={`/quiz/view/${getquizdata.id}`}
+        state={{ getquizdata }}
         className="inline-block border-e p-3 text-gray-700 hover:bg-gray-50 focus:relative"
         title="Edit Product"
       >
@@ -56,7 +58,7 @@ export const StudentButton = () => {
             d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
           />
         </svg>
-      </button>
+      </Link>
     </span>
 
   )

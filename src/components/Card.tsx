@@ -84,7 +84,7 @@ export const StudentCard = ({ getquizdata }) => {
           </div>
 
           <div className="">
-            <StudentButton></StudentButton>
+            <StudentButton key={getquizdata.id} getquizdata={getquizdata}></StudentButton>
           </div>
         </div>
 

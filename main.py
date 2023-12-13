@@ -233,6 +233,46 @@ def delete_question(question_id):
 
     return jsonify({"message": "Question and choices deleted successfully"})
 
+@app.route('/questions/count/<int:quiz_id>', methods=['GET'])
+def count_questions(quiz_id):
+    cur = mysql.connection.cursor()
+
+    # Count the number of questions associated with the quiz
+    cur.execute('''
+        SELECT COUNT(*) FROM Questions
+        WHERE quiz_id = %s
+    ''', (quiz_id,))
+
+    result = cur.fetchone()
+    cur.close()
+
+    return jsonify(result)
+
+@app.route('/questions/submit', methods=['POST'])
+def submit_choices():
+    data = request.get_json()
+
+    cur = mysql.connection.cursor()
+
+    score = 0
+
+    for question_id, choice_id in data.items():
+        # Query the is_correct value for the given choice_id
+        cur.execute('''
+            SELECT is_correct FROM Question_choices
+            WHERE question_id = %s AND choice_id = %s
+        ''', (question_id, choice_id))
+
+        result = cur.fetchone()
+        is_correct = result['is_correct'] if result else None
+
+        if is_correct == 1:
+            score += 1
+
+    mysql.connection.commit()
+    cur.close()
+
+    return jsonify(score)
 
 if __name__ == '__main__':
     app.run(debug=True)

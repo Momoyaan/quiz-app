@@ -15,7 +15,7 @@ const EditQuiz = () => {
   const quizDescription = state.getquizdata.description;
 
   const splitDate = quizDate.split(" ");
-  splitDate.pop(); // Remove "GMT"
+  splitDate.pop(); 
   const Date = splitDate.join(" ");
   const formattedDate = moment(Date).format("llll");
 
@@ -430,7 +430,7 @@ const EditQuiz = () => {
               key={index}
             >
               <div className="sm:flex sm:items-center sm:justify-between gap-4">
-                <p className="text-lg font-medium">{question.question_text}</p>
+                <p className="text-lg font-medium">{index+1}. {question.question_text}</p>
                 <DeleteButton questionId={question.question_id}></DeleteButton>
               </div>
               {question.choices.map((choice, index) => (

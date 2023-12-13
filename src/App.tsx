@@ -3,6 +3,9 @@ import { Route, Routes, Navigate, BrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 import RequireAuth from "./pages/Authentication/RequreAuth";
+import ViewQuiz from "./pages/ViewQuiz.tsx";
+import StartQuiz from "./pages/StartQuiz.tsx";
+import Result from "./pages/Result.tsx";
 
 const Teacher = lazy(() => import("./pages/Dashboard/Teacher"));
 const SignIn = lazy(() => import("./pages/Authentication/SignIn"));
@@ -124,6 +127,30 @@ function App() {
                   </Suspense>
                 }
               />
+              <Route
+                path="/quiz/view/*"
+                element={
+                  <Suspense fallback={<Loader></Loader>}>
+                    <ViewQuiz />
+                    </Suspense>
+                }
+               />
+              <Route
+                path="/quiz/answer/*"
+                element={
+                  <Suspense fallback={<Loader></Loader>}>
+                    <StartQuiz />
+                    </Suspense>
+                }
+               />
+              <Route
+                path="/quiz/result/*"
+                element={
+                  <Suspense fallback={<Loader></Loader>}>
+                    <Result />
+                    </Suspense>
+                }
+               />
               <Route
                 path="/profile"
                 element={
