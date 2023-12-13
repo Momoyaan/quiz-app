@@ -1,21 +1,12 @@
-CREATE TABLE `Question_choices` (
-  `choice_id` int(11) NOT NULL AUTO_INCREMENT,
-  `question_id` int(11) DEFAULT NULL,
-  `is_correct` tinyint(1) DEFAULT NULL,
-  `choice_text` text DEFAULT NULL,
-  PRIMARY KEY (`choice_id`),
-  KEY `question_id` (`question_id`),
-  CONSTRAINT `Question_choices_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `Questions` (`question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `Questions` (
-  `question_id` int(11) NOT NULL AUTO_INCREMENT,
-  `question_text` text DEFAULT NULL,
-  `quiz_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`question_id`),
-  KEY `Questions_FK` (`quiz_id`),
-  CONSTRAINT `Questions_FK` FOREIGN KEY (`quiz_id`) REFERENCES `Quizzes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(255) NOT NULL,
+  `lastName` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `occupation` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `Quizzes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -26,6 +17,25 @@ CREATE TABLE `Quizzes` (
   `date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `Questions` (
+  `question_id` int(11) NOT NULL AUTO_INCREMENT,
+  `question_text` text DEFAULT NULL,
+  `quiz_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`question_id`),
+  KEY `Questions_FK` (`quiz_id`),
+  CONSTRAINT `Questions_FK` FOREIGN KEY (`quiz_id`) REFERENCES `Quizzes` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `Question_choices` (
+  `choice_id` int(11) NOT NULL AUTO_INCREMENT,
+  `question_id` int(11) DEFAULT NULL,
+  `is_correct` tinyint(1) DEFAULT NULL,
+  `choice_text` text DEFAULT NULL,
+  PRIMARY KEY (`choice_id`),
+  KEY `question_id` (`question_id`),
+  CONSTRAINT `Question_choices_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `Questions` (`question_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `User_question_answers` (
   `user_id` int(11) NOT NULL,
@@ -40,16 +50,6 @@ CREATE TABLE `User_question_answers` (
   CONSTRAINT `User_question_answers_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `Questions` (`question_id`),
   CONSTRAINT `User_question_answers_ibfk_3` FOREIGN KEY (`choice_id`) REFERENCES `Question_choices` (`choice_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(255) NOT NULL,
-  `lastName` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `occupation` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 SET @saved_cs_client     = @@character_set_client;
