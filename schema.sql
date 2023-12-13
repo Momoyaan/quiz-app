@@ -107,3 +107,13 @@ BEGIN
   WHERE id = userId;
 END ;;
 DELIMITER ;
+
+CREATE VIEW users_view AS
+SELECT
+  users.id,
+  users.firstName,
+  users.lastName,
+  users.email,
+  users.password,
+  users.occupation
+FROM users
