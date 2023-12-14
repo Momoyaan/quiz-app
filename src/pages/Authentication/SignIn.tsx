@@ -13,7 +13,7 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/users/login', {
+      const response = await axios.post("http://localhost:5000/users/login", {
         email: email,
         password: password,
       });
@@ -34,12 +34,13 @@ const SignIn = () => {
         }
       }
     } catch (error) {
-      if(error.response.status === 401)
-      {
-      setErrorMessage(true);
-      }
-      else {
-      alert("Server is not available.")
+      if (error.response.status === 401) {
+        setErrorMessage(true);
+        console.log(errorMessage);
+        alert("Invalid credentials.");
+      } else {
+        alert("Server is not available.");
+        setErrorMessage(true);
       }
     }
   }
@@ -53,8 +54,8 @@ const SignIn = () => {
           </h1>
 
           <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati
-            sunt dolores deleniti inventore quaerat mollitia?
+            Welcome to the Quiz App! Please sign in to access the quizzes and
+            track your progress.
           </p>
 
           <form
@@ -144,11 +145,11 @@ const SignIn = () => {
             >
               Sign in
             </button>
-            {errorMessage && <ErrorLogin />}
+            {errorMessage ? (<ErrorLogin />) : null}
             <p className="text-center text-sm text-gray-500">
-              No account?
+              New here? No worries! Just{" "}
               <Link className="underline" to="/auth/signup">
-                Sign up
+                sign up!
               </Link>
             </p>
           </form>
