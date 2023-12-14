@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 import axios from "axios";
+import { useEffect, useState } from "react";
 const Result = () => {
   const location = useLocation();
   const { result, length, quizId } = location.state;
@@ -14,16 +15,42 @@ const Result = () => {
 
     try {
       const response = await axios.post("http://localhost:5000/quiz/complete", {
-        UserID: userId, // replace with actual user ID
+        UserID: parseInt(userId || "0"), // replace with actual user ID
         QuizID: quizId, // replace with actual quiz ID
         CompletionDate: quizDate, // replace with actual completion date
         Score: result, // replace with actual score
+        Result: ispassed
       });
       navigate("/quiz");
     } catch (error) {
       console.error(error);
     }
   };
+
+  const [questionCount, setQuestionCount] = useState();
+  const [ispassed, setispassed] = useState();
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/questions/count/${quizId}`)
+      .then((response) => {
+        if (response.data) {
+          setQuestionCount(response.data["COUNT(*)"]);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching question count:", error);
+      });
+  }, [quizId]);
+
+  useEffect(() => {
+    const passingScore = Math.floor(questionCount * 0.6);
+
+    if(result > passingScore){
+      setispassed(1);
+    } else {
+      setispassed(0);
+    }
+  }, [result, questionCount]);
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">

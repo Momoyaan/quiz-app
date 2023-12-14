@@ -123,7 +123,7 @@ def login_user():
 @app.route('/quiz', methods=['GET'])
 def get_quizzes():
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM Quizzes')
+    cur.execute('SELECT * FROM quiz_view')
     result = cur.fetchall()
     cur.close()
     return jsonify(result)
@@ -143,7 +143,7 @@ def add_quiz():
 @app.route('/quiz/<int:quiz_id>', methods=['GET'])
 def get_quiz(quiz_id):
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM Quizzes WHERE id = %s', (quiz_id,))
+    cur.execute('SELECT * FROM quiz_view WHERE id = %s', (quiz_id,))
     result = cur.fetchone()
     cur.close()
     return jsonify(result)
@@ -186,9 +186,7 @@ def update_quiz_is_active(quiz_id):
 def count_active_quizzes():
     cur = mysql.connection.cursor()
     cur.execute('''
-        SELECT COUNT(*) as active_quizzes
-        FROM Quizzes
-        WHERE is_active = 1
+        SELECT * FROM active_quizzes
     ''')
     result = cur.fetchone()
     cur.close()
@@ -200,22 +198,53 @@ def add_quiz_completion():
     cur = mysql.connection.cursor()
 
     cur.execute('''
-        INSERT INTO QuizCompletions (UserID, QuizID, CompletionDate, Score)
-        VALUES (%s, %s, %s, %s)
-    ''', (data['UserID'], data['QuizID'], data['CompletionDate'], data['Score']))
+        INSERT INTO QuizCompletions (UserID, QuizID, CompletionDate, Score, Result)
+        VALUES (%s, %s, %s, %s, %s)
+    ''', (data['UserID'], data['QuizID'], data['CompletionDate'], data['Score'], data['Result']))
 
     mysql.connection.commit()
     cur.close()
 
     return jsonify({"message": "Quiz completion added successfully"})
 
+@app.route('/quiz/passingrate/<int:user_id>', methods=['GET'])
+def calculate_passing_rate(user_id):
+    cur = mysql.connection.cursor()
+
+    # Count the total number of quizzes taken by the user
+    cur.execute('''
+        SELECT COUNT(*) as total_quizzes
+        FROM QuizCompletions
+        WHERE UserID = %s
+    ''', (user_id,))
+
+    total_quizzes = cur.fetchone()['total_quizzes']
+
+    # Count the number of quizzes passed by the user
+    cur.execute('''
+        SELECT COUNT(*) as passed_quizzes
+        FROM QuizCompletions
+        WHERE UserID = %s AND Result = 1
+    ''', (user_id,))
+
+    passed_quizzes = cur.fetchone()['passed_quizzes']
+
+    cur.close()
+
+    # Calculate the passing rate
+    if total_quizzes > 0:
+        passing_rate = (passed_quizzes / total_quizzes) * 100
+    else:
+        passing_rate = 0
+
+    return jsonify({"passing_rate": passing_rate})
+
 @app.route('/quiz/completions/count', methods=['GET'])
 def count_unique_users():
     cur = mysql.connection.cursor()
 
     cur.execute('''
-        SELECT COUNT(DISTINCT UserID) as unique_users
-        FROM QuizCompletions
+        SELECT * FROM unique_users 
     ''')
 
     result = cur.fetchone()
@@ -228,13 +257,27 @@ def get_quiz_results():
     cur = mysql.connection.cursor()
 
     cur.execute('''
-        SELECT * FROM QuizCompletions 
+        SELECT * FROM QuizCompletions_view 
     ''',) 
 
     results = cur.fetchall()
     cur.close()
 
     return jsonify(results)
+
+@app.route('/quiz/score/average/<int:UserID>', methods=['GET'])
+def get_avg_score(UserID):
+    cur = mysql.connection.cursor()
+
+    cur.execute('''
+       CALL average_score(%s) 
+    ''',(UserID,))
+
+    result = cur.fetchone()
+    cur.close()
+
+    return jsonify(result)
+
 
 @app.route('/quiz/result/<int:quiz_id>', methods=['GET'])
 def get_quiz_result(quiz_id):
@@ -256,7 +299,7 @@ def get_quiz_result(quiz_id):
 @app.route('/questions', methods=['GET'])
 def get_questions():
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM Questions')
+    cur.execute('SELECT * FROM questions_view')
     result = cur.fetchall()
     cur.close()
     return jsonify(result)
@@ -322,11 +365,23 @@ def delete_question(question_id):
 
     return jsonify({"message": "Question and choices deleted successfully"})
 
-@app.route('/questions/count/<int:quiz_id>', methods=['GET'])
-def count_questions(quiz_id):
+@app.route('/questions/count', methods=['GET'])
+def count_questions():
     cur = mysql.connection.cursor()
 
-    # Count the number of questions associated with the quiz
+    cur.execute('''
+        SELECT COUNT(*) FROM Questions
+    ''',)
+
+    result = cur.fetchone()
+    cur.close()
+
+    return jsonify(result)
+
+@app.route('/questions/count/<int:quiz_id>', methods=['GET'])
+def count_questions_id(quiz_id):
+    cur = mysql.connection.cursor()
+
     cur.execute('''
         SELECT COUNT(*) FROM Questions
         WHERE quiz_id = %s
