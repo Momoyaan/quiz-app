@@ -3,10 +3,11 @@ import { Route, Routes, Navigate, BrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 import RequireAuth from "./pages/Authentication/RequreAuth";
-import ViewQuiz from "./pages/ViewQuiz.tsx";
-import StartQuiz from "./pages/StartQuiz.tsx";
-import Result from "./pages/Result.tsx";
 
+const ViewQuiz = lazy(() => import("./pages/ViewQuiz.tsx"));
+const StartQuiz = lazy(() => import("./pages/StartQuiz.tsx"));
+const Result = lazy(() => import("./pages/Result.tsx"));
+const QuizResults = lazy(() => import("./pages/QuizResults.tsx"));
 const Teacher = lazy(() => import("./pages/Dashboard/Teacher"));
 const SignIn = lazy(() => import("./pages/Authentication/SignIn"));
 const SignUp = lazy(() => import("./pages/Authentication/SignUp"));
@@ -98,6 +99,14 @@ function App() {
                 element={
                   <Suspense fallback={<Loader></Loader>}>
                     <EditQuiz />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/quiz/results/*"
+                element={
+                  <Suspense fallback={<Loader></Loader>}>
+                    <QuizResults />
                   </Suspense>
                 }
               />

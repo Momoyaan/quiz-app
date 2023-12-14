@@ -36,7 +36,6 @@ const SignIn = () => {
     } catch (error) {
       if (error.response.status === 401) {
         setErrorMessage(true);
-        console.log(errorMessage);
         alert("Invalid credentials.");
       } else {
         alert("Server is not available.");

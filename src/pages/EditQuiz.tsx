@@ -15,7 +15,7 @@ const EditQuiz = () => {
   const quizDescription = state.getquizdata.description;
 
   const splitDate = quizDate.split(" ");
-  splitDate.pop(); 
+  splitDate.pop();
   const Date = splitDate.join(" ");
   const formattedDate = moment(Date).format("llll");
 
@@ -171,8 +171,6 @@ const EditQuiz = () => {
   useEffect(() => {
     fetchQuestions(quizId);
   }, [fetchQuestionsTrigger]);
-
-
 
   return (
     <div className="">
@@ -429,8 +427,10 @@ const EditQuiz = () => {
               className="rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition hover:shadow-lg sm:p-6"
               key={index}
             >
-              <div className="sm:flex sm:items-center sm:justify-between gap-4">
-                <p className="text-lg font-medium">{index+1}. {question.question_text}</p>
+              <div className="gap-4 sm:flex sm:items-center sm:justify-between">
+                <p className="text-lg font-medium">
+                  {index + 1}. {question.question_text}
+                </p>
                 <DeleteButton questionId={question.question_id}></DeleteButton>
               </div>
               {question.choices.map((choice, index) => (

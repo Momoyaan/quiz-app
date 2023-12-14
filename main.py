@@ -36,6 +36,7 @@ with app.app_context():
 
 # Routes
 
+####################### USERS ROUTES ############################
 @app.route('/users', methods=['GET'])
 def get_users():
     cur = mysql.connection.cursor()
@@ -56,6 +57,14 @@ def get_user(user_id):
 def add_user():
     new_user = request.get_json()
     cur = mysql.connection.cursor()
+
+    # Check if email already exists
+    cur.execute('SELECT * FROM users_view WHERE email = %s', (new_user['email'],))
+    result = cur.fetchone()
+    if result:
+        return jsonify({"message": "Email already exists"}), 400
+
+    # If email doesn't exist, create new user
     cur.execute('''
        CALL create_user(%s, %s, %s, %s, %s) 
     ''', (new_user['firstName'], new_user['lastName'], new_user['email'], new_user['password'], new_user['occupation']))
@@ -67,6 +76,12 @@ def add_user():
 def update_user(user_id):
     updated_user = request.get_json()
     cur = mysql.connection.cursor()
+
+    cur.execute('SELECT * FROM users_view WHERE email = %s', (updated_user['email'],))
+    result = cur.fetchone()
+    if result:
+        return jsonify({"message": "Email already exists"}), 400
+
     cur.execute('''
       CALL update_user(%s, %s, %s, %s, %s, %s) 
     ''', (user_id, updated_user['firstName'], updated_user['lastName'], updated_user['email'], updated_user['password'], updated_user['occupation']))
@@ -102,6 +117,9 @@ def login_user():
 
     return jsonify(user)
 
+
+
+####################### QUIZ ROUTES ############################
 @app.route('/quiz', methods=['GET'])
 def get_quizzes():
     cur = mysql.connection.cursor()
@@ -115,9 +133,9 @@ def add_quiz():
     new_quiz = request.get_json()
     cur = mysql.connection.cursor()
     cur.execute('''
-        INSERT INTO Quizzes (title, description, created_by, date)
-        VALUES (%s, %s, %s, %s)
-    ''', (new_quiz['title'], new_quiz['description'], new_quiz['created_by'], new_quiz['date']))
+        INSERT INTO Quizzes (title, description, created_by, date, userID)
+        VALUES (%s, %s, %s, %s, %s)
+    ''', (new_quiz['title'], new_quiz['description'], new_quiz['created_by'], new_quiz['date'], new_quiz['userID']))
     mysql.connection.commit()
     cur.close()
     return jsonify({"message": "Quiz added successfully"})
@@ -164,6 +182,77 @@ def update_quiz_is_active(quiz_id):
     cur.close()
     return jsonify({"message": "Quiz updated successfully"})
 
+@app.route('/quizzes/active', methods=['GET'])
+def count_active_quizzes():
+    cur = mysql.connection.cursor()
+    cur.execute('''
+        SELECT COUNT(*) as active_quizzes
+        FROM Quizzes
+        WHERE is_active = 1
+    ''')
+    result = cur.fetchone()
+    cur.close()
+    return jsonify(result)
+
+@app.route('/quiz/complete', methods=['POST'])
+def add_quiz_completion():
+    data = request.get_json()
+    cur = mysql.connection.cursor()
+
+    cur.execute('''
+        INSERT INTO QuizCompletions (UserID, QuizID, CompletionDate, Score)
+        VALUES (%s, %s, %s, %s)
+    ''', (data['UserID'], data['QuizID'], data['CompletionDate'], data['Score']))
+
+    mysql.connection.commit()
+    cur.close()
+
+    return jsonify({"message": "Quiz completion added successfully"})
+
+@app.route('/quiz/completions/count', methods=['GET'])
+def count_unique_users():
+    cur = mysql.connection.cursor()
+
+    cur.execute('''
+        SELECT COUNT(DISTINCT UserID) as unique_users
+        FROM QuizCompletions
+    ''')
+
+    result = cur.fetchone()
+    cur.close()
+
+    return jsonify(result)
+
+@app.route('/quiz/result', methods=['GET'])
+def get_quiz_results():
+    cur = mysql.connection.cursor()
+
+    cur.execute('''
+        SELECT * FROM QuizCompletions 
+    ''',) 
+
+    results = cur.fetchall()
+    cur.close()
+
+    return jsonify(results)
+
+@app.route('/quiz/result/<int:quiz_id>', methods=['GET'])
+def get_quiz_result(quiz_id):
+    cur = mysql.connection.cursor()
+
+    cur.execute('''
+        SELECT QuizCompletions.*, users.*
+        FROM QuizCompletions
+        JOIN users ON QuizCompletions.UserID = users.id
+        WHERE QuizCompletions.QuizID = %s
+    ''', (quiz_id,))
+
+    results = cur.fetchall()
+    cur.close()
+
+    return jsonify(results)
+
+####################### QUESTIONS ROUTES ############################
 @app.route('/questions', methods=['GET'])
 def get_questions():
     cur = mysql.connection.cursor()
@@ -273,6 +362,8 @@ def submit_choices():
     cur.close()
 
     return jsonify(score)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

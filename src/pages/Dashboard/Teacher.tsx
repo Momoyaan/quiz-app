@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { TeacherStats } from "../../components/Stats";
+import Stats from "../../components/Stats";
 import { useNavigate } from "react-router-dom";
 const Teacher = () => {
   const navigate = useNavigate();
@@ -13,9 +13,7 @@ const Teacher = () => {
   return (
     <React.Fragment>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
-      </div>
-      <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8">
-        <TeacherStats></TeacherStats>
+        <Stats></Stats>
       </div>
     </React.Fragment>
   );

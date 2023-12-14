@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Settings = () => {
-
+  const [emailError, setEmailError] = useState(false);
   const id = localStorage.getItem("id");
   const [form, setForm] = useState({
     firstName: localStorage.getItem("firstName"),
@@ -40,9 +40,10 @@ const Settings = () => {
       });
 
       localStorage.clear();
-      navigate("/")
+      setEmailError(false);
+      navigate("/");
     } catch (error) {
-      window.alert(error.message);
+      setEmailError(true);
     }
   }
 
@@ -56,7 +57,11 @@ const Settings = () => {
           </p>
         </div>
 
-        <form onSubmit={onSubmit} action="" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+        <form
+          onSubmit={onSubmit}
+          action=""
+          className="mx-auto mb-0 mt-8 max-w-md space-y-4"
+        >
           <div>
             <label htmlFor="email" className="sr-only">
               Email
@@ -128,6 +133,7 @@ const Settings = () => {
           </div>
 
           <div className="flex items-center justify-between">
+            {emailError && <p className="text-red-500">This email address is already in use. Please choose another one.</p>}
             <button
               type="submit"
               className="ml-auto inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"

@@ -5,7 +5,7 @@ import axios from "axios";
 const SignUp = () => {
   const [successMessage, setSuccessMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
-
+  const [emailError, setEmailError] = useState(false);
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -53,8 +53,9 @@ const SignUp = () => {
 
       setSuccessMessage(true);
       setErrorMessage(false);
+      setEmailError(false);
     } catch (error) {
-      window.alert(error.message);
+      setEmailError(true);
     }
   }
 
@@ -220,6 +221,11 @@ const SignUp = () => {
                   {errorMessage && (
                     <p className="text-red-500">
                       Please fill in all required fields
+                    </p>
+                  )}
+                  {emailError && (
+                    <p className="text-red-500">
+                     This email address is already in use. Please choose another one. 
                     </p>
                   )}
                   {successMessage && (

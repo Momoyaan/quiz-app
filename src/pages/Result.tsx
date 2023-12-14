@@ -1,8 +1,29 @@
-import { Link, useLocation } from "react-router-dom";
-
+import { useLocation, useNavigate } from "react-router-dom";
+import moment from "moment";
+import axios from "axios";
 const Result = () => {
   const location = useLocation();
-  const { result, length } = location.state;
+  const { result, length, quizId } = location.state;
+  const userId = localStorage.getItem("id");
+  const date = new Date();
+  const quizDate = moment(date).format("YYYY-MM-DD HH:mm:ss");
+  const navigate = useNavigate();
+
+  const completeQuiz = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:5000/quiz/complete", {
+        UserID: userId, // replace with actual user ID
+        QuizID: quizId, // replace with actual quiz ID
+        CompletionDate: quizDate, // replace with actual completion date
+        Score: result, // replace with actual score
+      });
+      navigate("/quiz");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
@@ -36,20 +57,20 @@ const Result = () => {
           </p>
         </div>
 
-        <div className="sm:flex sm:items-center sm:justify-between mt-32">
-          <a
+        <div className="mt-32 sm:flex sm:items-center sm:justify-between">
+          <button
             className="inline-block w-full rounded-lg bg-blue-500 px-5 py-3 text-center text-sm font-semibold text-white sm:w-auto"
-            href=""
+            onClick={completeQuiz}
           >
             Review Answers
-          </a>
+          </button>
 
-          <Link
+          <button
             className="mt-2 inline-block w-full rounded-lg bg-gray-50 px-5 py-3 text-center text-sm font-semibold text-gray-500 sm:mt-0 sm:w-auto"
-            to="/quiz"
+            onClick={completeQuiz}
           >
             Confirm
-          </Link>
+          </button>
         </div>
       </div>
     </div>

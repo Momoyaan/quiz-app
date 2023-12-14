@@ -52,7 +52,7 @@ const StartQuiz = () => {
       );
       const result = response.data;
       const length = Object.keys(selectedChoices).length;
-      navigate(`/quiz/result/${quizId}`, { state: { result, length } })
+      navigate(`/quiz/result/${quizId}`, { state: { result, length, quizId } })
     } catch (error) {
       console.error("Error submitting choices:", error);
     }

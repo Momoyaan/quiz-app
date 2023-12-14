@@ -11,12 +11,13 @@ const AddQuiz = () => {
     title: "",
     description: "",
     created_by: "",
-    date: ""
+    date: "",
+    userID: ""
   });
 
   form.created_by = localStorage.getItem("firstName") + " " + localStorage.getItem("lastName");
   form.date = moment(date).format('YYYY-MM-DD HH:mm:ss');
-
+  form.userID = localStorage.getItem("id");
   function updateForm(value) {
     return setForm((prev) => {
       return { ...prev, ...value };
