@@ -109,14 +109,24 @@ const EditQuiz = () => {
     }
   };
 
-  const handleChoiceChange = (index, event) => {
-    const values = [...choices];
-    if (event.target.name === "is_correct") {
-      values[index][event.target.name] = event.target.checked ? 1 : 0;
-    } else {
-      values[index][event.target.name] = event.target.value;
-    }
-    setChoices(values);
+  const handleChoiceChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
+    const updatedChoices = choices.map((choice, i) => {
+      if (event.target.name === 'is_correct') {
+        if (i === index) {
+          return { ...choice, is_correct: event.target.checked };
+        } else {
+          return { ...choice, is_correct: false };
+        }
+      } else {
+        if (i === index) {
+          return { ...choice, choice_text: event.target.value };
+        } else {
+          return choice;
+        }
+      }
+    });
+  
+    setChoices(updatedChoices);
   };
 
   const handleAddChoice = () => {
