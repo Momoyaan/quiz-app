@@ -23,7 +23,7 @@ const Header = () => {
             <div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
               <Link
                 to="/quiz/create"
-                className="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
+                className="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white text-center transition hover:bg-indigo-700 focus:outline-none focus:ring"
                 type="button"
               >
                 Let's Create Quiz!
@@ -35,7 +35,7 @@ const Header = () => {
             <div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
               <Link
                 to="/quiz"
-                className="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
+                className="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white text-center transition hover:bg-indigo-700 focus:outline-none focus:ring"
                 type="button"
               >
                 Check Quizzes!
