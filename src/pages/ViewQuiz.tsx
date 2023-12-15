@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import moment from "moment";
+import QuizAttemptsCard from "../components/QuizAttemptsCard";
 const ViewQuiz = () => {
   const { state } = useLocation();
   const quizId = state.getquizdata.id;
@@ -9,7 +10,7 @@ const ViewQuiz = () => {
   const quizDate = state.getquizdata.date;
   const quizTitle = state.getquizdata.title;
   const quizDescription = state.getquizdata.description;
-
+  const localuserId = localStorage.getItem("id");
   const splitDate = quizDate.split(" ");
   splitDate.pop();
   const Date = splitDate.join(" ");
@@ -29,6 +30,26 @@ const ViewQuiz = () => {
         console.error("Error fetching question count:", error);
       });
   }, [quizId]);
+
+  const [results, setResults] = useState<any[]>([]);
+  const [fetchQuestionsTrigger, setFetchQuestionsTrigger] = useState(false);
+  const QuestionResult = async (quizId, localuserId) => {
+    axios
+      .get(`http://localhost:5000/quiz/completions/view/${quizId}/${localuserId}`)
+      .then((response) => {
+        if (response.data) {
+          setResults(response.data);
+          setFetchQuestionsTrigger(true);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching question count:", error);
+      });
+  };
+
+  useEffect(() => {
+    QuestionResult(quizId, localuserId);
+  }, [fetchQuestionsTrigger]);
   return (
     <div>
       <Link
@@ -83,11 +104,27 @@ const ViewQuiz = () => {
         </p>
 
         <div className="sm:flex sm:items-center sm:justify-end">
-          <Link to={`/quiz/answer/${quizId}`} state={state} className="rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700">
+          <Link
+            to={`/quiz/answer/${quizId}`}
+            state={state}
+            className="rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700"
+          >
             Start Quiz
           </Link>
         </div>
       </article>
+      <span className="relative flex justify-center mt-4">
+        <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-transparent bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-75"></div>
+
+        <span className="relative z-10 bg-white px-6">Your Quiz Attempts</span>
+      </span>
+
+      {fetchQuestionsTrigger &&
+        results.map((result, index) => (
+          <div className="mb-4 mt-4">
+            <QuizAttemptsCard key={index} data={result} />
+          </div>
+        ))}
     </div>
   );
 };

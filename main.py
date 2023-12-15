@@ -295,6 +295,20 @@ def get_quiz_result(quiz_id):
 
     return jsonify(results)
 
+@app.route('/quiz/completions/view/<int:quiz_id>/<int:user_id>', methods=['GET'])
+def get_quiz_completion_view(quiz_id, user_id):
+    cur = mysql.connection.cursor()
+
+    cur.execute('''
+        SELECT * FROM QuizCompletions_view
+        WHERE QuizID = %s AND UserID = %s
+    ''', (quiz_id, user_id))
+
+    result = cur.fetchall()
+    cur.close()
+
+    return jsonify(result)
+
 ####################### QUESTIONS ROUTES ############################
 @app.route('/questions', methods=['GET'])
 def get_questions():

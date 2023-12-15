@@ -19,7 +19,7 @@ const Result = () => {
         QuizID: quizId, // replace with actual quiz ID
         CompletionDate: quizDate, // replace with actual completion date
         Score: result, // replace with actual score
-        Result: ispassed
+        Result: ispassed,
       });
       navigate("/quiz");
     } catch (error) {
@@ -45,7 +45,7 @@ const Result = () => {
   useEffect(() => {
     const passingScore = Math.floor(questionCount * 0.6);
 
-    if(result > passingScore){
+    if (result > passingScore) {
       setispassed(1);
     } else {
       setispassed(0);
@@ -84,16 +84,9 @@ const Result = () => {
           </p>
         </div>
 
-        <div className="mt-32 sm:flex sm:items-center sm:justify-between">
+        <div className="mt-32 sm:flex sm:items-center sm:justify-end">
           <button
             className="inline-block w-full rounded-lg bg-blue-500 px-5 py-3 text-center text-sm font-semibold text-white sm:w-auto"
-            onClick={completeQuiz}
-          >
-            Review Answers
-          </button>
-
-          <button
-            className="mt-2 inline-block w-full rounded-lg bg-gray-50 px-5 py-3 text-center text-sm font-semibold text-gray-500 sm:mt-0 sm:w-auto"
             onClick={completeQuiz}
           >
             Confirm
