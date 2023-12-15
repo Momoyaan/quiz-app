@@ -28,7 +28,7 @@ const Settings = () => {
     const updateUser = { ...form };
 
     try {
-      await axios.put(`http://localhost:5000/users/${id}`, updateUser, {
+      await axios.put(`http://0.0.0.0:5000/users/${id}`, updateUser, {
         headers: {
           "Content-Type": "application/json",
         },

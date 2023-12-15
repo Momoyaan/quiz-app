@@ -14,7 +14,7 @@ const Stats = () => {
   const [activeQuizzes, setActiveQuizzes] = useState();
   useEffect(() => {
     axios
-      .get("http://localhost:5000/quiz/completions/count")
+      .get("http://0.0.0.0:5000/quiz/completions/count")
       .then((response) => {
         if (response.data) {
           setuniqueUsers(response.data["unique_users"]);
@@ -27,7 +27,7 @@ const Stats = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/quizzes/active")
+      .get("http://0.0.0.0:5000/quizzes/active")
       .then((response) => {
         if (response.data) {
           setQuizCount(response.data["active_quizzes"]);
@@ -40,7 +40,7 @@ const Stats = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/users/${userId}`)
+      .get(`http://0.0.0.0:5000/users/${userId}`)
       .then((response) => {
         if (response.data) {
           setQuizCompletedCount(response.data["QuizCompletionsCount"]);
@@ -53,7 +53,7 @@ const Stats = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/questions/count`)
+      .get(`http://0.0.0.0:5000/questions/count`)
       .then((response) => {
         if (response.data) {
           setQuestionCount(response.data["COUNT(*)"]);
@@ -66,7 +66,7 @@ const Stats = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/quiz/view/count/${userId}`)
+      .get(`http://0.0.0.0:5000/quiz/view/count/${userId}`)
       .then((response) => {
         if (response.data) {
           setActiveQuizzes(response.data["count"]);
@@ -79,7 +79,7 @@ const Stats = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/quiz/passingrate/${userId}`)
+      .get(`http://0.0.0.0:5000/quiz/passingrate/${userId}`)
       .then((response) => {
         if (response.data) {
           setPassingRate(response.data["passing_rate"]);

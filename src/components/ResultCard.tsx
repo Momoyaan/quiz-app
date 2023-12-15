@@ -11,7 +11,7 @@ const ResultCard = ({ data }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/questions/count/${data.QuizID}`)
+      .get(`http://0.0.0.0:5000/questions/count/${data.QuizID}`)
       .then((response) => {
         if (response.data) {
           setQuestionCount(response.data["COUNT(*)"]);

@@ -14,7 +14,7 @@ const Result = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5000/quiz/complete", {
+      const response = await axios.post("http://0.0.0.0:5000/quiz/complete", {
         UserID: parseInt(userId || "0"), // replace with actual user ID
         QuizID: quizId, // replace with actual quiz ID
         CompletionDate: quizDate, // replace with actual completion date
@@ -31,7 +31,7 @@ const Result = () => {
   const [ispassed, setispassed] = useState();
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/questions/count/${quizId}`)
+      .get(`http://0.0.0.0:5000/questions/count/${quizId}`)
       .then((response) => {
         if (response.data) {
           setQuestionCount(response.data["COUNT(*)"]);

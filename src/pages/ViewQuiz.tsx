@@ -20,7 +20,7 @@ const ViewQuiz = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/questions/count/${quizId}`)
+      .get(`http://0.0.0.0:5000/questions/count/${quizId}`)
       .then((response) => {
         if (response.data) {
           setQuestionCount(response.data["COUNT(*)"]);
@@ -35,7 +35,7 @@ const ViewQuiz = () => {
   const [fetchQuestionsTrigger, setFetchQuestionsTrigger] = useState(false);
   const QuestionResult = async (quizId, localuserId) => {
     axios
-      .get(`http://localhost:5000/quiz/completions/view/${quizId}/${localuserId}`)
+      .get(`http://0.0.0.0:5000/quiz/completions/view/${quizId}/${localuserId}`)
       .then((response) => {
         if (response.data) {
           setResults(response.data);

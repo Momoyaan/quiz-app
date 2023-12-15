@@ -5,7 +5,7 @@ const DeleteButton = ({ questionId }) => {
     const navigate = useNavigate();
   async function deleteQuestion(questionId: number) {
     try {
-      await axios.delete(`http://localhost:5000/questions/${questionId}`);
+      await axios.delete(`http://0.0.0.0:5000/questions/${questionId}`);
       // Add any necessary state updates or navigation here
       navigate(0);
     } catch (error) {
