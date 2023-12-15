@@ -5,11 +5,12 @@ const SideBar = () => {
   const email = localStorage.getItem("email");
   const firstName = localStorage.getItem("firstName");
   const lastName = localStorage.getItem("lastName");
+  const occupation = localStorage.getItem("occupation");
   const logout = async () => {
     await localStorage.clear();
     navigate("/auth/signin");
   };
-
+  const occ = occupation?.toLowerCase();
   return (
     <React.Fragment>
       <div className="flex h-screen flex-col justify-between border-e bg-white">
@@ -21,14 +22,12 @@ const SideBar = () => {
           <ul className="mt-6 space-y-1">
             <li>
               <Link
-                to="/teacher"
+                to={`/${occ}`}
                 className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
               >
                 Dashboard
               </Link>
             </li>
-
-
 
             <li>
               <Link
@@ -123,7 +122,9 @@ const SideBar = () => {
             </svg>
             <div>
               <p className="text-xs">
-                <strong className="block font-medium">{firstName} {lastName}</strong>
+                <strong className="block font-medium">
+                  {firstName} {lastName}
+                </strong>
 
                 <span> {email} </span>
               </p>

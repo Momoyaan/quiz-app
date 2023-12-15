@@ -22,7 +22,7 @@ const TeacherLayout = lazy(() => import("./layout/TeacherLayout"));
 const AddQuiz = lazy(() => import("./pages/AddQuiz.tsx"))
 const Quiz = lazy(() => import("./pages/Quiz.tsx"))
 const EditQuiz = lazy(() => import("./pages/EditQuiz.tsx"))
-
+import "./App.css";
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
 
