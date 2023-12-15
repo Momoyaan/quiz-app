@@ -148,6 +148,34 @@ def get_quiz(quiz_id):
     cur.close()
     return jsonify(result)
 
+@app.route('/quiz/view/<int:user_id>', methods=['GET'])
+def get_quiz_view(user_id):
+    cur = mysql.connection.cursor()
+
+    cur.execute('''
+        SELECT * FROM quiz_view
+        WHERE userID = %s
+    ''', (user_id,))
+
+    result = cur.fetchall()
+    cur.close()
+
+    return jsonify(result)
+
+@app.route('/quiz/view/count/<int:user_id>', methods=['GET'])
+def count_quiz_view(user_id):
+    cur = mysql.connection.cursor()
+
+    cur.execute('''
+        SELECT COUNT(*) as count FROM quiz_view
+        WHERE userID = %s
+    ''', (user_id,))
+
+    result = cur.fetchone()
+    cur.close()
+
+    return jsonify(result)
+
 @app.route('/quiz/<int:quiz_id>', methods=['PUT'])
 def update_quiz(quiz_id):
     updated_quiz = request.get_json()

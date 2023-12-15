@@ -65,7 +65,7 @@ const SignUp = () => {
         <aside className="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
           <img
             alt="Pattern"
-            src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            src="https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             className="absolute inset-0 h-full w-full object-cover"
           />
         </aside>
@@ -92,7 +92,7 @@ const SignUp = () => {
             </h1>
 
             <p className="mt-4 leading-relaxed text-gray-500">
-              New here? Fantastic! Let's get started by creating your account.
+              Let's get started by creating your account!
             </p>
 
             <form
@@ -225,7 +225,8 @@ const SignUp = () => {
                   )}
                   {emailError && (
                     <p className="text-red-500">
-                     This email address is already in use. Please choose another one. 
+                      This email address is already in use. Please choose
+                      another one.
                     </p>
                   )}
                   {successMessage && (
