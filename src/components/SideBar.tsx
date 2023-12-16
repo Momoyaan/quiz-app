@@ -7,7 +7,7 @@ const SideBar = () => {
   const lastName = localStorage.getItem("lastName");
   const occupation = localStorage.getItem("occupation");
   const logout = async () => {
-    await localStorage.clear();
+    localStorage.clear();
     navigate("/auth/signin");
   };
   const occ = occupation?.toLowerCase();

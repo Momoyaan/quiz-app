@@ -82,13 +82,15 @@ const Stats = () => {
       .get(`http://0.0.0.0:5000/quiz/passingrate/${userId}`)
       .then((response) => {
         if (response.data) {
-          setPassingRate(response.data["passing_rate"]);
+          const fixedpassingrate = (response.data["passing_rate"]).toFixed(0);
+          setPassingRate(fixedpassingrate);
         }
       })
       .catch((error) => {
         console.error("Error fetching question count:", error);
       });
   }, [isStudent, userId]);
+
   return (
     <>
       {occupation == "Student" ? (
