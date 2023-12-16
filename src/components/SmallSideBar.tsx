@@ -14,7 +14,7 @@ const SmallSideBar = () => {
   const occ = occupation?.toLowerCase();
   const logout = async () => {
     await localStorage.clear();
-    navigate("/auth/signin");
+    navigate(0);
   };
   return (
     <div className="flex h-screen w-16 flex-col justify-between border-e bg-white">

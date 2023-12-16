@@ -8,7 +8,7 @@ const SideBar = () => {
   const occupation = localStorage.getItem("occupation");
   const logout = async () => {
     localStorage.clear();
-    navigate("/auth/signin");
+    navigate(0);
   };
   const occ = occupation?.toLowerCase();
   return (
