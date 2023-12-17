@@ -6,7 +6,7 @@ app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
 app.config['CORS_ORIGINS'] = [
-    'http://15.235.140.8:5000',
+    'http://15.235.140.8:8000',
     'http://localhost:5173',
 ]
 # MySQL configurations
