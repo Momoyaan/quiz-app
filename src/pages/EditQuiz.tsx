@@ -49,7 +49,7 @@ const EditQuiz = () => {
     const updateQuiz = { ...form };
 
     try {
-      await axios.put(`http://0.0.0.0:5000/quiz/${id}`, updateQuiz, {
+      await axios.put(`http://15.235.140.8:5000/quiz/${id}`, updateQuiz, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -68,7 +68,7 @@ const EditQuiz = () => {
 
   async function deleteQuiz() {
     try {
-      await axios.delete(`http://0.0.0.0:5000/quiz/${id}`);
+      await axios.delete(`http://15.235.140.8:5000/quiz/${id}`);
 
       navigate("/quiz");
     } catch (error) {
@@ -79,7 +79,7 @@ const EditQuiz = () => {
   const handleClick = async () => {
     try {
       const updatedValue = isChecked ? 0 : 1;
-      await axios.put(`http://0.0.0.0:5000/quiz/edit/${id}`, {
+      await axios.put(`http://15.235.140.8:5000/quiz/edit/${id}`, {
         is_active: updatedValue,
       });
       setIsChecked(!isChecked);
@@ -99,7 +99,7 @@ const EditQuiz = () => {
 
     try {
       const response = await axios.post(
-        "http://0.0.0.0:5000/questions",
+        "http://15.235.140.8:5000/questions",
         questionData,
       );
       console.log(response.data);
@@ -138,7 +138,7 @@ const EditQuiz = () => {
   const fetchQuestions = async (quizId) => {
     try {
       const response = await axios.get(
-        `http://0.0.0.0:5000/questions/${quizId}`,
+        `http://15.235.140.8:5000/questions/${quizId}`,
       );
       const groupedQuestions = groupByQuestion(response.data);
       setQuestions(groupedQuestions);

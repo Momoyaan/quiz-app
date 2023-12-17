@@ -48,7 +48,7 @@ const StartQuiz = () => {
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
-        "http://0.0.0.0:5000/questions/submit",
+        "http://15.235.140.8:5000/questions/submit",
         selectedChoices,
       );
       const result = response.data;
@@ -62,7 +62,7 @@ const StartQuiz = () => {
   const fetchQuestions = async (quizId) => {
     try {
       const response = await axios.get(
-        `http://0.0.0.0:5000/questions/${quizId}`,
+        `http://15.235.140.8:5000/questions/${quizId}`,
       );
       const groupedQuestions = groupByQuestion(response.data);
       setQuestions(groupedQuestions);

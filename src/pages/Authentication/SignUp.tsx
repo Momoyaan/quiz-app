@@ -38,7 +38,7 @@ const SignUp = () => {
     const newUser = { ...form };
 
     try {
-      await axios.post("http://0.0.0.0:5000/users", newUser, {
+      await axios.post("http://15.235.140.8:5000/users", newUser, {
         headers: {
           "Content-Type": "application/json",
         },

@@ -38,7 +38,7 @@ const AddQuiz = () => {
     const newQuestion = { ...form };
 
     try {
-      await axios.post("http://0.0.0.0:5000/quiz", newQuestion, {
+      await axios.post("http://15.235.140.8:5000/quiz", newQuestion, {
         headers: {
           "Content-Type": "application/json",
         },

@@ -9,7 +9,7 @@ const QuizResults = () => {
   const [results, setResults] = useState<any[]>([]);
   useEffect(() => {
     axios
-      .get(`http://0.0.0.0:5000/quiz/result/${quizId}`)
+      .get(`http://15.235.140.8:5000/quiz/result/${quizId}`)
       .then((response) => {
         if (response.data) {
           setResults(response.data);
