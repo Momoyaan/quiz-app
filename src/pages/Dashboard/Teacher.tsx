@@ -19,7 +19,7 @@ const Teacher = () => {
         <article className="group">
           <img
             alt="Lava"
-            src="httpss://images.unsplash.com/photo-1541753236788-b0ac1fc5009d?q=80&w=1712&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="https://images.unsplash.com/photo-1541753236788-b0ac1fc5009d?q=80&w=1712&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             className="h-56 w-full rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"
           />
 

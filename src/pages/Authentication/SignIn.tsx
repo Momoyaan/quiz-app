@@ -14,7 +14,7 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("https://flask-server-z0aw.onrender.com/users/login", {
+      const response = await axios.post("http://0.0.0.0:5000/users/login", {
         email: email,
         password: password,
       });
@@ -83,7 +83,7 @@ const SignIn = () => {
 
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
                   <svg
-                    xmlns="https://www.w3.org/2000/svg"
+                    xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4 text-gray-400"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -116,7 +116,7 @@ const SignIn = () => {
 
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
                   <svg
-                    xmlns="https://www.w3.org/2000/svg"
+                    xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4 text-gray-400"
                     fill="none"
                     viewBox="0 0 24 24"

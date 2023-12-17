@@ -10,7 +10,7 @@ export const TeacherButton = ({ getquizdata }: { getquizdata: unknown }) => {
         title="View Results"
       >
         <svg
-          xmlns="https://www.w3.org/2000/svg"
+          xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           stroke-width="1.5"
@@ -36,7 +36,7 @@ export const TeacherButton = ({ getquizdata }: { getquizdata: unknown }) => {
         title="Edit Quiz"
       >
         <svg
-          xmlns="https://www.w3.org/2000/svg"
+          xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
@@ -64,7 +64,7 @@ export const StudentButton = ({ getquizdata }: { getquizdata: unknown }) => {
         title="View Quiz"
       >
         <svg
-          xmlns="https://www.w3.org/2000/svg"
+          xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           stroke-width="1.5"

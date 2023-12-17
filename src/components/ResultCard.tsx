@@ -12,7 +12,7 @@ const ResultCard = ({ data }) => {
 
   useEffect(() => {
     axios
-      .get(`https://flask-server-z0aw.onrender.com/questions/count/${data.QuizID}`)
+      .get(`http://0.0.0.0:5000/questions/count/${data.QuizID}`)
       .then((response) => {
         if (response.data) {
           setQuestionCount(response.data["COUNT(*)"]);
@@ -50,7 +50,7 @@ const ResultCard = ({ data }) => {
           <div className="mt-2 sm:flex sm:items-center sm:gap-2">
             <div className="flex items-center gap-1 text-gray-500">
               <svg
-                xmlns="https://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
                 height="14"
                 width="14"
                 viewBox="0 0 512 512"
@@ -77,7 +77,7 @@ const ResultCard = ({ data }) => {
         {data.Score > passingScore ? (
           <strong className="-mb-[2px] -me-[2px] inline-flex items-center gap-1 rounded-ee-xl rounded-ss-xl bg-green-600 px-3 py-1.5 text-white">
             <svg
-              xmlns="https://www.w3.org/2000/svg"
+              xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-4"
               fill="none"
               viewBox="0 0 24 24"
@@ -96,7 +96,7 @@ const ResultCard = ({ data }) => {
         ) : (
           <strong className="-mb-[2px] -me-[2px] inline-flex items-center gap-1 rounded-ee-xl rounded-ss-xl bg-red-600 px-3 py-1.5 text-white">
             <svg
-              xmlns="https://www.w3.org/2000/svg"
+              xmlns="http://www.w3.org/2000/svg"
               height="16"
               width="16"
               viewBox="0 0 512 512"

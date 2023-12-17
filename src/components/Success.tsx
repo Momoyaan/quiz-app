@@ -6,7 +6,7 @@ const Success = () => {
       <div className="flex items-start gap-4">
         <span className="text-green-600">
           <svg
-            xmlns="https://www.w3.org/2000/svg"
+            xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
@@ -39,7 +39,7 @@ const Success = () => {
               <span className="text-sm"> Login </span>
 
               <svg
-                xmlns="https://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"

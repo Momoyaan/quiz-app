@@ -48,7 +48,7 @@ const StartQuiz = () => {
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
-        "https://flask-server-z0aw.onrender.com/questions/submit",
+        "http://0.0.0.0:5000/questions/submit",
         selectedChoices,
       );
       const result = response.data;
@@ -62,7 +62,7 @@ const StartQuiz = () => {
   const fetchQuestions = async (quizId) => {
     try {
       const response = await axios.get(
-        `https://flask-server-z0aw.onrender.com/questions/${quizId}`,
+        `http://0.0.0.0:5000/questions/${quizId}`,
       );
       const groupedQuestions = groupByQuestion(response.data);
       setQuestions(groupedQuestions);

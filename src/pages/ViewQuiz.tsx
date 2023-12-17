@@ -20,7 +20,7 @@ const ViewQuiz = () => {
 
   useEffect(() => {
     axios
-      .get(`https://flask-server-z0aw.onrender.com/questions/count/${quizId}`)
+      .get(`http://0.0.0.0:5000/questions/count/${quizId}`)
       .then((response) => {
         if (response.data) {
           setQuestionCount(response.data["COUNT(*)"]);
@@ -35,7 +35,7 @@ const ViewQuiz = () => {
   const [fetchQuestionsTrigger, setFetchQuestionsTrigger] = useState(false);
   const QuestionResult = async (quizId, localuserId) => {
     axios
-      .get(`https://flask-server-z0aw.onrender.com/quiz/completions/view/${quizId}/${localuserId}`)
+      .get(`http://0.0.0.0:5000/quiz/completions/view/${quizId}/${localuserId}`)
       .then((response) => {
         if (response.data) {
           setResults(response.data);
@@ -68,7 +68,7 @@ const ViewQuiz = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="inline-block rounded bg-blue-600 p-2 text-white">
             <svg
-              xmlns="https://www.w3.org/2000/svg"
+              xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"

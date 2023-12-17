@@ -9,7 +9,7 @@ const QuizResults = () => {
   const [results, setResults] = useState<any[]>([]);
   useEffect(() => {
     axios
-      .get(`https://flask-server-z0aw.onrender.com/quiz/result/${quizId}`)
+      .get(`http://0.0.0.0:5000/quiz/result/${quizId}`)
       .then((response) => {
         if (response.data) {
           setResults(response.data);

@@ -5,7 +5,7 @@ const DeleteButton = ({ questionId }: { questionId: number }) => {
     const navigate = useNavigate();
   async function deleteQuestion(questionId: number) {
     try {
-      await axios.delete(`https://flask-server-z0aw.onrender.com/questions/${questionId}`);
+      await axios.delete(`http://0.0.0.0:5000/questions/${questionId}`);
       // Add any necessary state updates or navigation here
       navigate(0);
     } catch (error) {
@@ -20,7 +20,7 @@ const DeleteButton = ({ questionId }: { questionId: number }) => {
         onClick={() => deleteQuestion(questionId)}
       >
         <svg
-          xmlns="https://www.w3.org/2000/svg"
+          xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           stroke-width="1.5"

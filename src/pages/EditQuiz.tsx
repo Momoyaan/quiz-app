@@ -49,7 +49,7 @@ const EditQuiz = () => {
     const updateQuiz = { ...form };
 
     try {
-      await axios.put(`https://flask-server-z0aw.onrender.com/quiz/${id}`, updateQuiz, {
+      await axios.put(`http://0.0.0.0:5000/quiz/${id}`, updateQuiz, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -68,7 +68,7 @@ const EditQuiz = () => {
 
   async function deleteQuiz() {
     try {
-      await axios.delete(`https://flask-server-z0aw.onrender.com/quiz/${id}`);
+      await axios.delete(`http://0.0.0.0:5000/quiz/${id}`);
 
       navigate("/quiz");
     } catch (error) {
@@ -79,7 +79,7 @@ const EditQuiz = () => {
   const handleClick = async () => {
     try {
       const updatedValue = isChecked ? 0 : 1;
-      await axios.put(`https://flask-server-z0aw.onrender.com/quiz/edit/${id}`, {
+      await axios.put(`http://0.0.0.0:5000/quiz/edit/${id}`, {
         is_active: updatedValue,
       });
       setIsChecked(!isChecked);
@@ -99,7 +99,7 @@ const EditQuiz = () => {
 
     try {
       const response = await axios.post(
-        "https://flask-server-z0aw.onrender.com/questions",
+        "http://0.0.0.0:5000/questions",
         questionData,
       );
       console.log(response.data);
@@ -138,7 +138,7 @@ const EditQuiz = () => {
   const fetchQuestions = async (quizId) => {
     try {
       const response = await axios.get(
-        `https://flask-server-z0aw.onrender.com/questions/${quizId}`,
+        `http://0.0.0.0:5000/questions/${quizId}`,
       );
       const groupedQuestions = groupByQuestion(response.data);
       setQuestions(groupedQuestions);
@@ -200,7 +200,7 @@ const EditQuiz = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="inline-block rounded bg-blue-600 p-2 text-white">
             <svg
-              xmlns="https://www.w3.org/2000/svg"
+              xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"

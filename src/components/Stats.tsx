@@ -14,7 +14,7 @@ const Stats = () => {
   const [activeQuizzes, setActiveQuizzes] = useState();
   useEffect(() => {
     axios
-      .get("https://flask-server-z0aw.onrender.com/quiz/completions/count")
+      .get("http://0.0.0.0:5000/quiz/completions/count")
       .then((response) => {
         if (response.data) {
           setuniqueUsers(response.data["unique_users"]);
@@ -27,7 +27,7 @@ const Stats = () => {
 
   useEffect(() => {
     axios
-      .get("https://flask-server-z0aw.onrender.com/quizzes/active")
+      .get("http://0.0.0.0:5000/quizzes/active")
       .then((response) => {
         if (response.data) {
           setQuizCount(response.data["active_quizzes"]);
@@ -40,7 +40,7 @@ const Stats = () => {
 
   useEffect(() => {
     axios
-      .get(`https://flask-server-z0aw.onrender.com/users/${userId}`)
+      .get(`http://0.0.0.0:5000/users/${userId}`)
       .then((response) => {
         if (response.data) {
           setQuizCompletedCount(response.data["QuizCompletionsCount"]);
@@ -53,7 +53,7 @@ const Stats = () => {
 
   useEffect(() => {
     axios
-      .get(`https://flask-server-z0aw.onrender.com/questions/count`)
+      .get(`http://0.0.0.0:5000/questions/count`)
       .then((response) => {
         if (response.data) {
           setQuestionCount(response.data["COUNT(*)"]);
@@ -66,7 +66,7 @@ const Stats = () => {
 
   useEffect(() => {
     axios
-      .get(`https://flask-server-z0aw.onrender.com/quiz/view/count/${userId}`)
+      .get(`http://0.0.0.0:5000/quiz/view/count/${userId}`)
       .then((response) => {
         if (response.data) {
           setActiveQuizzes(response.data["count"]);
@@ -79,7 +79,7 @@ const Stats = () => {
 
   useEffect(() => {
     axios
-      .get(`https://flask-server-z0aw.onrender.com/quiz/passingrate/${userId}`)
+      .get(`http://0.0.0.0:5000/quiz/passingrate/${userId}`)
       .then((response) => {
         if (response.data) {
           const fixedpassingrate = (response.data["passing_rate"]).toFixed(0);
@@ -98,7 +98,7 @@ const Stats = () => {
           <article className="flex items-center gap-4 rounded-lg border border-gray-100 bg-white p-6">
             <span className="rounded-full bg-blue-100 p-3 text-blue-600">
               <svg
-                xmlns="https://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
                 height="16"
                 width="14"
                 viewBox="0 0 448 512"
@@ -123,7 +123,7 @@ const Stats = () => {
           <article className="flex items-center gap-4 rounded-lg border border-gray-100 bg-white p-6 sm:justify-between">
             <span className="rounded-full bg-blue-100 p-3 text-blue-600 sm:order-last">
               <svg
-                xmlns="https://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
                 height="16"
                 width="16"
                 viewBox="0 0 512 512"
@@ -146,7 +146,7 @@ const Stats = () => {
           <article className="flex items-center gap-4 rounded-lg border border-gray-100 bg-white p-6">
             <span className="rounded-full bg-blue-100 p-3 text-blue-600">
               <svg
-                xmlns="https://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
                 height="16"
                 width="14"
                 viewBox="0 0 448 512"
@@ -174,7 +174,7 @@ const Stats = () => {
           <article className="flex items-center gap-4 rounded-lg border border-gray-100 bg-white p-6 sm:justify-between">
             <span className="rounded-full bg-blue-100 p-3 text-blue-600 sm:order-last">
               <svg
-                xmlns="https://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
                 height="16"
                 width="20"
                 viewBox="0 0 640 512"
@@ -197,7 +197,7 @@ const Stats = () => {
           <article className="flex items-center gap-4 rounded-lg border border-gray-100 bg-white p-6 sm:justify-between">
             <span className="rounded-full bg-blue-100 p-3 text-blue-600 sm:order-last">
               <svg
-                xmlns="https://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
                 height="16"
                 width="14"
                 viewBox="0 0 448 512"
