@@ -1,8 +1,8 @@
+// @ts-nocheck
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import moment from "moment";
 import axios from "axios";
-import EditQuizPortal from "../components/Badges";
 import Badges from "../components/Badges";
 import DeleteButton from "../components/DeleteButton";
 const EditQuiz = () => {

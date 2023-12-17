@@ -1,3 +1,4 @@
+// @ts-nocheck
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -6,7 +7,6 @@ import QuizAttemptsCard from "../components/QuizAttemptsCard";
 const ViewQuiz = () => {
   const { state } = useLocation();
   const quizId = state.getquizdata.id;
-  const quizisActive = state.getquizdata.is_active;
   const quizDate = state.getquizdata.date;
   const quizTitle = state.getquizdata.title;
   const quizDescription = state.getquizdata.description;

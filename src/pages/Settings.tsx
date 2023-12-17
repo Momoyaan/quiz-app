@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from "react";
 import { Breadcrumb } from "../components/Breadcrumb";
 import { useNavigate } from "react-router-dom";

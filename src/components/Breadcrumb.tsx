@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export const Breadcrumb = ({ pageName }) => {
+export const Breadcrumb = ({ pageName }: { pageName: string }) => {
 
     return (
 <nav aria-label="Breadcrumb">

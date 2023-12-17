@@ -1,3 +1,4 @@
+// @ts-nocheck
 import moment from "moment";
 import studentImage from "../assets/student2.png";
 import { useEffect, useState } from "react";

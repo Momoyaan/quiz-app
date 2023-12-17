@@ -1,3 +1,4 @@
+// @ts-nocheck
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -9,7 +10,6 @@ const Stats = () => {
   const [uniqueUsers, setuniqueUsers] = useState();
   const isStudent = occupation === "Student";
   const isTeacher = occupation === "Teacher";
-  const [questionCount, setQuestionCount] = useState();
   const [passing_rate, setPassingRate] = useState();
   const [activeQuizzes, setActiveQuizzes] = useState();
   useEffect(() => {

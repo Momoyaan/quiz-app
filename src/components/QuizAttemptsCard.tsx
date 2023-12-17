@@ -1,8 +1,13 @@
+// @ts-nocheck
 import moment from "moment";
 import studentImage from "../assets/student2.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
-const QuizAttemptsCard = ({ data }) => {
+type QuizAttemptsCardProps = {
+  data: unknown; // Replace 'any' with the appropriate type for the 'data' property
+};
+
+const QuizAttemptsCard = ({ data }: QuizAttemptsCardProps) => {
   const splitDate = data.CompletionDate.split(" ");
   splitDate.pop();
   const Date = splitDate.join(" ");

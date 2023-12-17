@@ -1,4 +1,4 @@
-const Badges = ({ type }) => {
+const Badges = ({ type }: { type: string }) => {
   return (
     <div className="">
       {/* Success */}

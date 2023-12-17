@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-export const TeacherButton = ({ getquizdata }: { getquizdata: any }) => {
+export const TeacherButton = ({ getquizdata }: { getquizdata: unknown }) => {
   return (
     <span className="inline-flex overflow-hidden rounded-md border bg-white shadow-sm">
       <Link
-        to={`/quiz/results/${getquizdata.id}`}
+        to={`/quiz/results/${(getquizdata as { id: string }).id}`}
         state={{ getquizdata }}
         className="inline-block border-e p-3 text-gray-700 hover:bg-gray-50 focus:relative"
         title="View Results"
@@ -30,7 +30,7 @@ export const TeacherButton = ({ getquizdata }: { getquizdata: any }) => {
         </svg>
       </Link>
       <Link
-        to={`/quiz/edit/${getquizdata.id}`}
+        to={`/quiz/edit/${(getquizdata as { id: string }).id}`}
         state={{ getquizdata }}
         className="inline-block p-3 text-gray-700 hover:bg-gray-50 focus:relative"
         title="Edit Quiz"
@@ -54,11 +54,11 @@ export const TeacherButton = ({ getquizdata }: { getquizdata: any }) => {
   );
 };
 
-export const StudentButton = ({ getquizdata }) => {
+export const StudentButton = ({ getquizdata }: { getquizdata: unknown }) => {
   return (
     <span className="inline-flex overflow-hidden rounded-md border bg-white shadow-sm">
       <Link
-        to={`/quiz/view/${getquizdata.id}`}
+        to={`/quiz/view/${(getquizdata as { id: string }).id}`}
         state={{ getquizdata }}
         className="inline-block border-e p-3 text-gray-700 hover:bg-gray-50 focus:relative"
         title="View Quiz"

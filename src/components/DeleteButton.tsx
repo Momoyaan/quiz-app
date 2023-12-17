@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const DeleteButton = ({ questionId }) => {
+const DeleteButton = ({ questionId }: { questionId: number }) => {
     const navigate = useNavigate();
   async function deleteQuestion(questionId: number) {
     try {

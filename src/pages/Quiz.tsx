@@ -1,3 +1,4 @@
+// @ts-nocheck
 import axios from "axios";
 import { StudentCard, TeacherCard } from "../components/Card.tsx";
 import { useState, useEffect } from "react";

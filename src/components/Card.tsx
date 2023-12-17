@@ -3,15 +3,15 @@ import { TeacherButton, StudentButton } from "./Button";
 import React from "react";
 import moment from "moment";
 
-export const TeacherCard = ({ getquizdata }) => {
+export const TeacherCard = ({ getquizdata }: { getquizdata: unknown }) => {
   const quizdata = getquizdata;
-  const splitDate = quizdata.date.split(" ");
+  const splitDate = (quizdata as { date: string }).date.split(" ");
   splitDate.pop(); // Remove "GMT"
   const Date = splitDate.join(" ");
   const formattedDate = moment(Date).format("llll");
-  const quiz_is_active = quizdata.is_active == 1 ? "Active" : "Inactive";
+  const quiz_is_active = (quizdata as { is_active: number }).is_active == 1 ? "Active" : "Inactive";
   const localuserId = localStorage.getItem("id");
-  const quizuserId = quizdata.userID;
+  const quizuserId = (quizdata as { userID: string }).userID;
   return (
     <React.Fragment>
       <Link
@@ -23,17 +23,17 @@ export const TeacherCard = ({ getquizdata }) => {
         <div className="sm:flex sm:justify-between sm:gap-4">
           <div>
             <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
-              {quizdata.title}
+              { (quizdata as { title: string }).title }
             </h3>
 
             <p className="mt-1 text-xs font-medium text-gray-600">
-              {quizdata.created_by}
+              { (quizdata as { created_by: string }).created_by }
             </p>
           </div>
           {localuserId == quizuserId ? (
             <div className="">
               <TeacherButton
-                key={getquizdata.id}
+                key={(getquizdata as { id: string }).id}
                 getquizdata={getquizdata}
               ></TeacherButton>
             </div>
@@ -42,7 +42,7 @@ export const TeacherCard = ({ getquizdata }) => {
 
         <div className="mt-4">
           <p className="max-w-[40ch] text-sm text-gray-500">
-            {quizdata.description}
+            { (quizdata as { description: string }).description }
           </p>
         </div>
 
@@ -62,13 +62,13 @@ export const TeacherCard = ({ getquizdata }) => {
   );
 };
 
-export const StudentCard = ({ getquizdata }) => {
+export const StudentCard = ({ getquizdata }: { getquizdata: unknown }) => {
   const quizdata = getquizdata;
-  const splitDate = quizdata.date.split(" ");
+  const splitDate = (quizdata as { date: string }).date.split(" ");
   splitDate.pop(); // Remove "GMT"
   const Date = splitDate.join(" ");
   const formattedDate = moment(Date).format("llll");
-  const quiz_is_active = quizdata.is_active == 1 ? "Active" : "Inactive";
+  const quiz_is_active = (quizdata as { is_active: number }).is_active == 1 ? "Active" : "Inactive";
   return (
     <>
       <a
@@ -80,17 +80,17 @@ export const StudentCard = ({ getquizdata }) => {
         <div className="sm:flex sm:justify-between sm:gap-4">
           <div>
             <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
-              {quizdata.title}
+              { (quizdata as { title: string }).title }
             </h3>
 
             <p className="mt-1 text-xs font-medium text-gray-600">
-              by {quizdata.created_by}
+              by {(quizdata as { created_by: string }).created_by}
             </p>
           </div>
 
           <div className="">
             <StudentButton
-              key={getquizdata.id}
+                key={(getquizdata as { id: string }).id}
               getquizdata={getquizdata}
             ></StudentButton>
           </div>
@@ -98,7 +98,7 @@ export const StudentCard = ({ getquizdata }) => {
 
         <div className="mt-4">
           <p className="max-w-[40ch] text-sm text-gray-500">
-            {quizdata.description}
+            { (quizdata as { description: string }).description }
           </p>
         </div>
 

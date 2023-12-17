@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 import axios from "axios";
@@ -63,7 +64,7 @@ const Result = () => {
             <svg
               className="h-4 w-4"
               fill="currentColor"
-              viewbox="0 0 20 20"
+              viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path

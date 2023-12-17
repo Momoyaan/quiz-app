@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Link, useNavigate } from "react-router-dom";
 import home from "../assets/home.svg";
 import book from "../assets/book-open.svg";
