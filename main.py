@@ -5,14 +5,10 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
-app.config['CORS_ORIGINS'] = [
-    'http://15.235.140.8:8000',
-    'http://localhost:5173',
-]
 # MySQL configurations
-app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_HOST'] = '15.235.140.8'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_PASSWORD'] = 'qwerty123'
 app.config['MYSQL_DB'] = 'react'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
