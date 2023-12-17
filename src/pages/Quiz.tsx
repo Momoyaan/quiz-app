@@ -11,7 +11,7 @@ const Quiz = () => {
 
     const getdata = async () => {
 
-        const res = await axios.get("http://15.235.140.8:8000/quiz", {
+        const res = await axios.get("https://flask-server-z0aw.onrender.com/quiz", {
             headers: {
                 "Content-Type": "application/json"
             }

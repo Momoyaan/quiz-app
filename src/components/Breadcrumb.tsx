@@ -10,7 +10,7 @@ export const Breadcrumb = ({ pageName }: { pageName: string }) => {
         <span className="sr-only"> Dashboard </span>
 
         <svg
-          xmlns="http://www.w3.org/2000/svg"
+          xmlns="https://www.w3.org/2000/svg"
           className="h-4 w-4"
           fill="none"
           viewBox="0 0 24 24"
@@ -28,7 +28,7 @@ export const Breadcrumb = ({ pageName }: { pageName: string }) => {
 
     <li className="rtl:rotate-180">
       <svg
-        xmlns="http://www.w3.org/2000/svg"
+        xmlns="https://www.w3.org/2000/svg"
         className="h-4 w-4"
         viewBox="0 0 20 20"
         fill="currentColor"

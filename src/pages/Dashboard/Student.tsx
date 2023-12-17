@@ -16,7 +16,7 @@ const Student = () => {
         <article className="group">
           <img
             alt="Lava"
-            src="https://images.unsplash.com/photo-1702145754106-05d909f08c9d?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="httpss://images.unsplash.com/photo-1702145754106-05d909f08c9d?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             className="h-56 w-full rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"
           />
 

@@ -15,7 +15,7 @@ const Result = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://15.235.140.8:8000/quiz/complete", {
+      const response = await axios.post("https://flask-server-z0aw.onrender.com/quiz/complete", {
         UserID: parseInt(userId || "0"), // replace with actual user ID
         QuizID: quizId, // replace with actual quiz ID
         CompletionDate: quizDate, // replace with actual completion date
@@ -32,7 +32,7 @@ const Result = () => {
   const [ispassed, setispassed] = useState();
   useEffect(() => {
     axios
-      .get(`http://15.235.140.8:8000/questions/count/${quizId}`)
+      .get(`https://flask-server-z0aw.onrender.com/questions/count/${quizId}`)
       .then((response) => {
         if (response.data) {
           setQuestionCount(response.data["COUNT(*)"]);
@@ -65,7 +65,7 @@ const Result = () => {
               className="h-4 w-4"
               fill="currentColor"
               viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
+              xmlns="https://www.w3.org/2000/svg"
             >
               <path
                 clipRule="evenodd"

@@ -38,7 +38,7 @@ const AddQuiz = () => {
     const newQuestion = { ...form };
 
     try {
-      await axios.post("http://15.235.140.8:8000/quiz", newQuestion, {
+      await axios.post("https://flask-server-z0aw.onrender.com/quiz", newQuestion, {
         headers: {
           "Content-Type": "application/json",
         },

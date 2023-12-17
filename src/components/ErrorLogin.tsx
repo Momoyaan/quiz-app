@@ -4,7 +4,7 @@ const ErrorLogin = () => {
 <div role="alert" className="rounded border-s-4 border-red-500 bg-red-50 p-4">
   <div className="flex items-center gap-2 text-red-800">
     <svg
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns="https://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
       className="h-5 w-5"

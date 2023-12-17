@@ -29,7 +29,7 @@ const Settings = () => {
     const updateUser = { ...form };
 
     try {
-      await axios.put(`http://15.235.140.8:8000/users/${id}`, updateUser, {
+      await axios.put(`https://flask-server-z0aw.onrender.com/users/${id}`, updateUser, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -78,7 +78,7 @@ const Settings = () => {
 
               <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns="https://www.w3.org/2000/svg"
                   className="h-4 w-4 text-gray-400"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -110,7 +110,7 @@ const Settings = () => {
 
               <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns="https://www.w3.org/2000/svg"
                   className="h-4 w-4 text-gray-400"
                   fill="none"
                   viewBox="0 0 24 24"

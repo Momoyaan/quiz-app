@@ -16,7 +16,7 @@ const QuizAttemptsCard = ({ data }: QuizAttemptsCardProps) => {
 
   useEffect(() => {
     axios
-      .get(`http://15.235.140.8:8000/questions/count/${data.QuizID}`)
+      .get(`https://flask-server-z0aw.onrender.com/questions/count/${data.QuizID}`)
       .then((response) => {
         if (response.data) {
           setQuestionCount(response.data["COUNT(*)"]);
@@ -47,7 +47,7 @@ const QuizAttemptsCard = ({ data }: QuizAttemptsCardProps) => {
           <div className="mt-2 sm:flex sm:items-center sm:gap-2">
             <div className="flex items-center gap-1 text-gray-500">
               <svg
-                xmlns="http://www.w3.org/2000/svg"
+                xmlns="https://www.w3.org/2000/svg"
                 height="14"
                 width="14"
                 viewBox="0 0 512 512"
@@ -63,7 +63,7 @@ const QuizAttemptsCard = ({ data }: QuizAttemptsCardProps) => {
         {data.Score > passingScore ? (
           <strong className="-mb-[2px] -me-[2px] inline-flex items-center gap-1 rounded-ee-xl rounded-ss-xl bg-green-600 px-3 py-1.5 text-white">
             <svg
-              xmlns="http://www.w3.org/2000/svg"
+              xmlns="https://www.w3.org/2000/svg"
               className="h-4 w-4"
               fill="none"
               viewBox="0 0 24 24"
@@ -82,7 +82,7 @@ const QuizAttemptsCard = ({ data }: QuizAttemptsCardProps) => {
         ) : (
           <strong className="-mb-[2px] -me-[2px] inline-flex items-center gap-1 rounded-ee-xl rounded-ss-xl bg-red-600 px-3 py-1.5 text-white">
             <svg
-              xmlns="http://www.w3.org/2000/svg"
+              xmlns="https://www.w3.org/2000/svg"
               height="16"
               width="16"
               viewBox="0 0 512 512"
